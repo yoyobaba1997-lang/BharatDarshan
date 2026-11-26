@@ -105,3 +105,5 @@
 - [x] Stage 36 — Provider metadata coverage and timestamp freshness audit
 
 - [x] Stage 37 — Web app smoke-test script and combined manual release verification workflow
+
+- [x] Stage 38 — Process-local API per-IP rate limiting
