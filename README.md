@@ -55,3 +55,7 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 
 ## Status
 🚧 Early foundation. Catalogue ingestion still requires configured TMDB credentials and runtime verification. Streaming-provider availability is not yet populated. UI source changes are committed incrementally; browser, Android, and Fire TV runtime testing is pending.
+
+## Stage 8
+- Indian language discovery browser
+- Search improvements for aliases, original titles, genres, keywords and language metadata
