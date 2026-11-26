@@ -25,3 +25,14 @@
 - [x] Unit tests added for catalogue and provider normalization\n- [ ] Run tests in CI and verify results
 - [ ] Source/legal review
 - [ ] Deployment configuration
+
+
+## Stage Progress
+- [x] Stage 10 — Catalogue insights dashboard and quality review
+- [x] Stage 11 — Corrected language-code registry and dynamic Indian-language discovery shelves
+- [x] Stage 12 — PWA installability and offline shell
+- [ ] Stage 13 — Ingestion pipeline safeguards, incremental refresh, and metadata source traceability
+- [ ] Stage 14 — Deployment readiness, environment validation, and operational health checks
+- [ ] Stage 15 — Adapter contracts and fixture-based compatibility layer (official specifications only)
+- [ ] Stage 16 — Accessibility, TV/remote navigation, and frontend runtime QA
+- [ ] Stage 17 — Final release checklist and deployment verification
