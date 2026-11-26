@@ -64,3 +64,27 @@ export function validateCatalogue(items) {
   }
   return issues;
 }
+
+export function auditCatalogue(items) {
+  const issues = [];
+  const duplicateKeys = new Map();
+  const counts = { total: items.length, missingPoster: 0, missingOverview: 0, missingYear: 0, missingGenres: 0, missingLanguages: 0, duplicateTitles: 0, invalidRatings: 0 };
+  const normalizedTitles = value => String(value ?? "").trim().toLocaleLowerCase().replace(/[^\\p{L}\\p{N}]+/gu, " ").trim();
+  items.forEach((raw, index) => {
+    const id = raw?.id ?? null;
+    const title = String(raw?.title ?? raw?.name ?? "").trim();
+    const add = (code, message) => issues.push({ id, index, code, message });
+    if (!(raw?.poster || raw?.posterUrl || raw?.image)) { counts.missingPoster++; add("missing_poster", "Poster artwork is missing"); }
+    if (!String(raw?.overview ?? raw?.synopsis ?? "").trim()) { counts.missingOverview++; add("missing_overview", "Synopsis/overview is missing"); }
+    if (!(Number.isInteger(Number(raw?.year)) && Number(raw.year) > 1800 && Number(raw.year) <= new Date().getFullYear()+2) && !/^\\d{4}/.test(String(raw?.releaseDate ?? ""))) { counts.missingYear++; add("missing_year", "Valid release year/date is missing"); }
+    if (!Array.isArray(raw?.genres) || raw.genres.length === 0) { counts.missingGenres++; add("missing_genres", "Genre metadata is missing"); }
+    if (!Array.isArray(raw?.languages) || raw.languages.length === 0) { counts.missingLanguages++; add("missing_languages", "Primary language metadata is missing"); }
+    if (raw?.rating != null && (!Number.isFinite(Number(raw.rating)) || Number(raw.rating) < 0 || Number(raw.rating) > 10)) { counts.invalidRatings++; add("invalid_rating", "Rating is outside the expected 0–10 range"); }
+    const key = [normalizedTitles(title), String(raw?.year ?? raw?.releaseDate?.slice?.(0,4) ?? ""), String(raw?.type ?? "")].join("|");
+    if (title && duplicateKeys.has(key)) { counts.duplicateTitles++; add("possible_duplicate", "Possible duplicate title/year/type; compare metadata before merging"); }
+    else if (title) duplicateKeys.set(key, id);
+  });
+  const fields = ["missingPoster","missingOverview","missingYear","missingGenres","missingLanguages"];
+  const completeness = items.length ? Math.round((1-fields.reduce((sum,key)=>sum+counts[key],0)/(items.length*fields.length))*100) : 100;
+  return { counts, completenessPercent: Math.max(0,completeness), issues };
+}
