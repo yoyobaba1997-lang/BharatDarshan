@@ -10,6 +10,8 @@
   "scripts": {
     "check": "npm run check --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
-    "ingest": "npm run ingest --workspace @bharatdarshan/api"
+    "ingest": "npm run ingest --workspace @bharatdarshan/api",
+    "start:web": "npm run start --workspace @bharatdarshan/web",
+    "start:api": "npm run start --workspace @bharatdarshan/api"
   }
 }
