@@ -26,7 +26,7 @@ async function genresFor(kind) {
   return genreCache.get(kind);
 }
 
-export function normalizeTmdbResult(raw, kind = "movie") {
+export function normalizeTmdbResult(raw, kind = "movie", genreMap = new Map()) {
   const isTv = kind === "tv";
   const title = isTv ? raw.name : raw.title;
   const originalTitle = isTv ? raw.original_name : raw.original_title;
@@ -42,7 +42,8 @@ export function normalizeTmdbResult(raw, kind = "movie") {
     overview: raw.overview ?? "",
     releaseDate: date || null,
     year: date ? Number(date.slice(0, 4)) : null,
-    genres: (raw.genre_ids ?? []).map(id => id),
+    genres: (raw.genre_ids ?? []).map(id => genreMap.get(id)).filter(Boolean),
+    genreIds: raw.genre_ids ?? [],
     languages: language ? [language] : [],
     audioLanguages: [],
     subtitleLanguages: [],
@@ -55,6 +56,11 @@ export function normalizeTmdbResult(raw, kind = "movie") {
     streamingPlatforms: [],
     providerAvailability: []
   };
+}
+
+export async function fetchGenreMap(kind = "movie") {
+  const data = await tmdbRequest(`/genre/${kind}/list`, { language: "en" });
+  return new Map((data.genres ?? []).map(g => [g.id, g.name]));
 }
 
 export async function fetchTrending(kind = "all", window = "day", page = 1) {
