@@ -31,12 +31,19 @@ for (const type of types) {
     }
   }
 }
-const merged = new Map();
-for (const item of all) {
+const existing = process.env.INGEST_REPLACE === "1" ? [] : (fs.existsSync(outputPath) ? JSON.parse(fs.readFileSync(outputPath,"utf8")) : []);
+const merged = new Map(existing.map(item => [item.id,item]));
+const ingestedAt = new Date().toISOString();
+for (const rawItem of all) {
+  const item = { ...rawItem, ingestion: { ...(rawItem.ingestion||{}), source:"TMDB", ingestedAt, modes:[...new Set([...(rawItem.ingestion?.modes||[]), ...modes])], languages:[...new Set([...(rawItem.ingestion?.languages||[]), ...languages])] } };
   const previous = merged.get(item.id);
   if (!previous) { merged.set(item.id,item); continue; }
   const union = (a,b) => [...new Set([...(a||[]),...(b||[])])];
+  const keep=(fresh,old)=>fresh===null||fresh===undefined||fresh===""?old:fresh;
   merged.set(item.id,{...previous,...item,
+    title:keep(item.title,previous.title),originalTitle:keep(item.originalTitle,previous.originalTitle),overview:keep(item.overview,previous.overview),releaseDate:keep(item.releaseDate,previous.releaseDate),year:keep(item.year,previous.year),poster:keep(item.poster,previous.poster),backdrop:keep(item.backdrop,previous.backdrop),rating:keep(item.rating,previous.rating),
+    sourceIds:{...(previous.sourceIds||{}),...(item.sourceIds||{})},
+    ingestion:{...(previous.ingestion||{}),...(item.ingestion||{}),modes:union(previous.ingestion?.modes,item.ingestion?.modes),languages:union(previous.ingestion?.languages,item.ingestion?.languages)},
     tags:union(previous.tags,item.tags),collections:union(previous.collections,item.collections),
     genres:union(previous.genres,item.genres),languages:union(previous.languages,item.languages),
     audioLanguages:union(previous.audioLanguages,item.audioLanguages),subtitleLanguages:union(previous.subtitleLanguages,item.subtitleLanguages),
@@ -44,4 +51,4 @@ for (const item of all) {
   });
 }
 fs.writeFileSync(outputPath,JSON.stringify([...merged.values()],null,2)+"\n");
-console.log(`Saved ${merged.size} normalized titles from ${all.length} source records to ${outputPath}`);
+console.log(`Saved ${merged.size} normalized titles from ${all.length} source records to ${outputPath}. Mode: ${process.env.INGEST_REPLACE === "1" ? "replace" : "incremental merge"}. Set INGEST_REPLACE=1 to replace the snapshot.`);
