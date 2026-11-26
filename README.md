@@ -171,3 +171,9 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Recently Viewed shelf is available from the home catalogue.
 - Clear History removes local history immediately.
 - History is device/browser-local and is not synced to a server.
+
+
+## Stage 28 — Web Runtime Smoke Tests
+- Automated smoke test starts the web server and checks HTML/runtime API configuration.
+- Verifies security headers and PWA assets (CSS, JS, manifest, service worker, icon).
+- Web smoke tests are included in workspace CI.
