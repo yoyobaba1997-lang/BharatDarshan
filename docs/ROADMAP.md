@@ -71,3 +71,5 @@
 
 - [x] Stage 23 — TMDB attribution notice and licensing policy documented (approved logo asset integration still pending)
 - [x] Stage 22 — Scheduled/manual catalogue refresh workflow created (requires TMDB secret; artifact only)
+
+- [x] Stage 24 — API input validation, security headers, and integration test coverage
