@@ -43,7 +43,8 @@ export function searchCatalogue(items, query = "", filters = {}) {
       && (!filters.language || item.languages.includes(filters.language) || item.audioLanguages.includes(filters.language) || item.subtitleLanguages.includes(filters.language) || item.dubLanguages.includes(filters.language))
       && (!filters.genre || item.genres.includes(filters.genre))
       && (!filters.region || item.regions.includes(filters.region))
-      && (!filters.year || item.year === Number(filters.year));
+      && (!filters.year || item.year === Number(filters.year))
+      && (!filters.platform || item.streamingPlatforms.includes(filters.platform) || item.providerAvailability.some(provider => provider.platform === filters.platform));
   });
 }
 
