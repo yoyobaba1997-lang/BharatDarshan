@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchTrending } from "../../../packages/catalog/src/providers/tmdb.js";
+import { fetchTrending, fetchGenreMap } from "../../../packages/catalog/src/providers/tmdb.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.resolve(here, "../../../packages/catalog/src/ingested-catalog.json");
