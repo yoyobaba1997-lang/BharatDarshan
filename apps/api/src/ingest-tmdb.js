@@ -9,6 +9,7 @@ const pages = Math.max(1, Math.min(20, Number(process.env.INGEST_PAGES || 1)));
 const types = (process.env.INGEST_TYPES || "movie,tv").split(",").map(x => x.trim()).filter(Boolean);
 const modes = (process.env.INGEST_MODES || "trending,popular,top_rated,indian_languages").split(",").map(x => x.trim()).filter(Boolean);
 const languages = (process.env.INGEST_LANGUAGES || "hi,ta,te,ml,kn,bn,mr,gu,pa,or,as,ur").split(",").map(x => x.trim()).filter(Boolean);
+if(!Number.isFinite(Number(process.env.INGEST_PAGES||1)))throw new Error("INGEST_PAGES must be a number");if(types.some(type=>!["movie","tv"].includes(type)))throw new Error("INGEST_TYPES supports only movie,tv");if(modes.some(mode=>!["trending","popular","top_rated","indian_languages"].includes(mode)))throw new Error("Unsupported INGEST_MODES entry");if(!languages.length)throw new Error("INGEST_LANGUAGES must include at least one language code");
 const modeTags = { trending:"trending", popular:"popular", top_rated:"top-rated" };
 const all = [];
 for (const type of types) {
