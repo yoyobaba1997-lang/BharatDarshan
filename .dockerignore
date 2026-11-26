@@ -4,4 +4,3 @@ node_modules
 .github
 .env
 .env.*
-packages/catalog/src/ingested-catalog.json
