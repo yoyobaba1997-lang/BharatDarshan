@@ -51,3 +51,8 @@
 - [ ] Provider availability coverage imported from authorized sources
 
 **Release status:** Source implementation is in place; production release remains blocked on external credentials, live deployment, CI verification, and runtime QA.
+
+- [x] Stage 18 — Personal local watchlist/My List
+- [ ] Stage 19 — User account sync and cloud watchlist (requires secure auth/backend decision)
+- [ ] Stage 20 — Live provider availability data and source/region/time provenance (authorized data source review required)
+- [ ] Stage 21 — Live browser/device QA and production release verification
