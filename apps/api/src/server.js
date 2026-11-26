@@ -11,6 +11,7 @@ const ingestedPath = path.resolve(here, "../../../packages/catalog/src/ingested-
 const activePath = fs.existsSync(ingestedPath) ? ingestedPath : samplePath;
 const catalogue = JSON.parse(fs.readFileSync(activePath, "utf8")).map(normalizeTitle);
 const PORT = Number(process.env.PORT || 3000);
+const API_STARTED_AT = new Date().toISOString();
 
 function send(res, status, body) {
   res.writeHead(status, { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*", "x-content-type-options":"nosniff", "x-frame-options":"DENY", "referrer-policy":"no-referrer", "permissions-policy":"camera=(), microphone=(), geolocation=()", "vary":"Origin", "cache-control":"public, max-age=60" });
@@ -31,7 +32,7 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
   if (url.pathname === "/categories") return send(res, 200, catalogueCategories);
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
-  if (url.pathname === "/catalogue-meta") {const snapshotExists=activePath===ingestedPath;const snapshotStat=snapshotExists?fs.statSync(activePath):null;const providerRecords=catalogue.flatMap(item=>item.providerAvailability||[]);const providerTitles=catalogue.filter(item=>(item.providerAvailability||[]).length).length;const checkedDates=providerRecords.map(record=>record.checkedAt).filter(Boolean).sort();return send(res,200,{source:snapshotExists?"ingested-snapshot":"demo-sample",sourceFile:path.basename(activePath),titleCount:catalogue.length,snapshotModifiedAt:snapshotStat?.mtime.toISOString()||null,providerMetadataTitles:providerTitles,providerRecordCount:providerRecords.length,providerRegions:[...new Set(providerRecords.map(record=>record.region).filter(Boolean))],latestProviderCheckedAt:checkedDates.at(-1)||null,apiStartedAt:new Date().toISOString()});}
+  if (url.pathname === "/catalogue-meta") {const snapshotExists=activePath===ingestedPath;const snapshotStat=snapshotExists?fs.statSync(activePath):null;const providerRecords=catalogue.flatMap(item=>item.providerAvailability||[]);const providerTitles=catalogue.filter(item=>(item.providerAvailability||[]).length).length;const checkedDates=providerRecords.map(record=>record.checkedAt).filter(Boolean).sort();return send(res,200,{source:snapshotExists?"ingested-snapshot":"demo-sample",sourceFile:path.basename(activePath),titleCount:catalogue.length,snapshotModifiedAt:snapshotStat?.mtime.toISOString()||null,providerMetadataTitles:providerTitles,providerRecordCount:providerRecords.length,providerRegions:[...new Set(providerRecords.map(record=>record.region).filter(Boolean))],latestProviderCheckedAt:checkedDates.at(-1)||null,apiStartedAt:API_STARTED_AT});}
   if (url.pathname === "/shelves") return send(res, 200, Object.fromEntries(Object.entries(buildCatalogueShelves(catalogue)).map(([name, items]) => [name, items.length])));
   if (url.pathname === "/quality") return send(res, 200, auditCatalogue(catalogue));
   if (url.pathname === "/export") return send(res, 200, toGenericCatalogue(catalogue));
