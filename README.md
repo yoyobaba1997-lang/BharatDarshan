@@ -83,3 +83,29 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Service worker caches the app shell for offline launch.
 - Offline catalogue falls back to the labelled demo catalogue when the API is unavailable.
 - Offline caching is limited to same-origin app shell assets; API metadata and poster images are not guaranteed offline.
+
+
+## Stage 13 — Safer Incremental Ingestion
+- TMDB requests retry rate-limit and transient server failures with bounded exponential backoff and `Retry-After` support.
+- Ingestion defaults to incremental merge with existing records; `INGEST_REPLACE=1` explicitly replaces the snapshot.
+- Source IDs, source attribution, ingestion timestamp, and per-record discovery provenance are preserved.
+- Snapshot structural validation runs before writing.
+- `/health` reports loaded catalogue count and snapshot filename.
+
+## Stage 14 — Deployment Readiness
+- Dockerfiles for web and API services.
+- Docker Compose orchestration with API health check and web dependency.
+- Runtime API URL configuration for the browser client.
+- Configurable API CORS origin and response security/cache headers.
+- `.dockerignore` excludes secrets, Git metadata, and generated ingested snapshot from container build context.
+
+## Stage 15 — Metadata Adapter
+- Generic normalized metadata export adapter.
+- API route: `GET /export`.
+- Fixture tests cover metadata preservation and missing-field defaults.
+- Nuvio/Stremio compatibility remains pending verified official interface/specification; no stream endpoints are implemented.
+
+## Stage 16 — Accessibility & QA Improvements
+- Accessible labels for primary navigation, search, filters, and language search.
+- Detail modal keyboard focus handling, focus restoration, and Tab trap.
+- Adapter syntax checks included in workspace CI.
