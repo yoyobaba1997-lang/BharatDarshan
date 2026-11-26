@@ -33,3 +33,16 @@ Set `BHARATDARSHAN_API` to the browser-reachable API URL when deploying to a rem
 ## Scheduled catalogue refresh
 
 `.github/workflows/catalogue-refresh.yml` runs weekly and can also be manually dispatched. It requires the repository secret `TMDB_READ_ACCESS_TOKEN`. The workflow creates and audits a fresh snapshot, then uploads it as a 30-day artifact. It does not automatically commit catalogue data or redeploy the live API. Manual runs can optionally enable bounded provider enrichment.
+
+
+## Configurable local/container deployment
+Copy `.env.example` to `.env` and set `API_PORT`, `WEB_PORT`, `ALLOWED_ORIGIN`, and `BHARATDARSHAN_API` for your environment. The web app's API URL is injected into the served HTML. For a public deployment, `BHARATDARSHAN_API` must be a browser-reachable HTTPS endpoint; a Docker-internal hostname alone will not work for browsers. Set `ALLOWED_ORIGIN` to the exact public web origin when CORS should be restricted.
+
+Run configuration validation before launch:
+
+```sh
+docker compose config
+docker compose up --build -d
+docker compose ps
+API_URL=https://your-api.example npm run smoke --workspace @bharatdarshan/api
+```
