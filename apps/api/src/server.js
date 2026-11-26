@@ -32,6 +32,13 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
   if (url.pathname === "/shelves") return send(res, 200, Object.fromEntries(Object.entries(buildCatalogueShelves(catalogue)).map(([name, items]) => [name, items.length])));
   if (url.pathname === "/quality") return send(res, 200, auditCatalogue(catalogue));
+  if (url.pathname === "/stats") {
+    const typeCounts = Object.fromEntries(["movie","series","anime","episode"].map(type => [type, catalogue.filter(item => item.type === type || (type === "anime" && item.tags?.includes("anime"))).length]));
+    const languageCounts = {};
+    catalogue.forEach(item => [...(item.languages || []), ...(item.audioLanguages || [])].forEach(code => { languageCounts[code] = (languageCounts[code] || 0) + 1; }));
+    const indianCount = catalogue.filter(item => item.isIndian || item.tags?.includes("indian-content") || (item.regions || []).includes("IN")).length;
+    return send(res, 200, { total: catalogue.length, indian: indianCount, typeCounts, languageCounts, quality: auditCatalogue(catalogue) });
+  }
   if (url.pathname === "/catalog") {
     const query = url.searchParams.get("q") ?? "";
     const filters = {
@@ -46,7 +53,7 @@ const server = http.createServer((req, res) => {
     const offset = Math.max(0, Number(url.searchParams.get("offset") || 0));
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
-  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality"] });
+  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality", "/stats"] });
 });
 
 server.listen(PORT, "0.0.0.0", () => {
