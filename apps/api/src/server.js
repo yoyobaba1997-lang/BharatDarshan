@@ -48,7 +48,8 @@ const server = http.createServer((req, res) => {
       language: url.searchParams.get("language") || undefined,
       genre: url.searchParams.get("genre") || undefined,
       region: url.searchParams.get("region") || undefined,
-      year: url.searchParams.get("year") || undefined
+      year: url.searchParams.get("year") || undefined,
+      platform: url.searchParams.get("platform") || undefined
     };
     const results = searchCatalogue(catalogue, query, filters);
     const requestedLimit=Number(url.searchParams.get("limit")||50);const requestedOffset=Number(url.searchParams.get("offset")||0);if(!Number.isInteger(requestedLimit)||requestedLimit<1||requestedLimit>100||!Number.isInteger(requestedOffset)||requestedOffset<0)return send(res,400,{error:"limit must be 1–100 and offset must be a non-negative integer"});const limit=requestedLimit;const offset=requestedOffset;
