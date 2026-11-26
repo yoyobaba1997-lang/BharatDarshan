@@ -59,3 +59,11 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 ## Stage 8
 - Indian language discovery browser
 - Search improvements for aliases, original titles, genres, keywords and language metadata
+
+
+## Stage 9 — Catalogue Quality Audit
+- Audit catalogue metadata for missing poster, synopsis, release year, genres and primary language.
+- Detect possible duplicate title/year/type records and ratings outside the 0–10 range.
+- Quality report available from API route `/quality`.
+- Run local audit with `npm run audit --workspace @bharatdarshan/api`.
+- Completeness percentage is a simple metadata-field metric, not a quality judgement about the content itself.
