@@ -238,3 +238,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Dashboard now reports whether the API loaded an ingested snapshot or demonstration sample.
 - Snapshot modification date is shown when available.
 - Provenance metadata is stored with the bounded offline cache so offline dashboard views retain context.
+
+
+## Stage 36 — Provider Metadata Quality Audit
+- Quality audit reports provider record counts, titles with provider metadata, missing checked timestamps, and stale/invalid timestamps (30-day freshness window).
+- Dashboard displays provider metadata audit counts.
+- This freshness metric describes the metadata timestamp, not guaranteed streaming availability.
