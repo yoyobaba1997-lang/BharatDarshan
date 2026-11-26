@@ -1,5 +1,5 @@
 const base=String(process.env.API_URL||"http://localhost:3000").replace(/\/$/,"");
-const checks=["/health","/languages","/categories","/platforms","/stats","/quality","/catalog?limit=1","/export"];
+const checks=["/health","/catalogue-meta","/languages","/categories","/platforms","/stats","/quality","/catalog?limit=1","/export"];
 let failed=0;
 for(const route of checks){
   try{
