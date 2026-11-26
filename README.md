@@ -232,3 +232,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Reports title count, snapshot file modification time, provider metadata coverage/regions, latest provider checked timestamp, and API startup time.
 - Added endpoint to integration tests and deployment smoke checks.
 - Snapshot timestamps are filesystem metadata; they are not a guarantee of provider availability freshness.
+
+
+## Stage 35 — Dashboard Data Provenance
+- Dashboard now reports whether the API loaded an ingested snapshot or demonstration sample.
+- Snapshot modification date is shown when available.
+- Provenance metadata is stored with the bounded offline cache so offline dashboard views retain context.
