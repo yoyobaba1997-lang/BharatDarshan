@@ -90,6 +90,8 @@ test("catalogue audit reports missing metadata, invalid rating and duplicate tit
   assert.ok(report.completenessPercent < 100);
 });
 
+test("catalogue audit reports provider metadata coverage and stale timestamps",()=>{const report=auditCatalogue([{id:"p",title:"Provider title",providerAvailability:[{platform:"Example",checkedAt:"2020-01-01T00:00:00Z"},{platform:"Missing timestamp"}]}]);assert.equal(report.counts.providerMetadataTitles,1);assert.equal(report.counts.providerRecords,2);assert.equal(report.counts.staleProviderRecords,1);assert.equal(report.counts.missingProviderCheckedAt,1);assert.ok(report.issues.some(issue=>issue.code==="provider_stale"));});
+
 test("catalogue audit treats an empty catalogue as 100 percent completeness", () => {
   const report=auditCatalogue([]);
   assert.equal(report.completenessPercent,100);
