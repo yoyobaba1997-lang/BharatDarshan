@@ -1,7 +1,7 @@
 # Release checklist
 
 ## Source/CI
-- [ ] GitHub Actions latest push/PR run passes
+- [x] GitHub Actions run 45893141187 passes tests, checks, and both Docker builds
 - [ ] `npm test` passes
 - [ ] `npm run check` passes
 - [ ] Catalogue audit reviewed
