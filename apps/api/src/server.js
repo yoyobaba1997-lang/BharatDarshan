@@ -39,7 +39,7 @@ const server = http.createServer((req, res) => {
     const languageCounts = {};
     catalogue.forEach(item => [...(item.languages || []), ...(item.audioLanguages || [])].forEach(code => { languageCounts[code] = (languageCounts[code] || 0) + 1; }));
     const indianCount = catalogue.filter(item => item.isIndian || item.tags?.includes("indian-content") || (item.regions || []).includes("IN")).length;
-    return send(res, 200, { total: catalogue.length, indian: indianCount, typeCounts, languageCounts, quality: auditCatalogue(catalogue) });
+    const providerTitles=catalogue.filter(item=>Array.isArray(item.providerAvailability)&&item.providerAvailability.length).length;const providerNames=[...new Set(catalogue.flatMap(item=>(item.providerAvailability||[]).map(record=>record.platform)))];const providerRegions=[...new Set(catalogue.flatMap(item=>(item.providerAvailability||[]).map(record=>record.region)))];return send(res, 200, { total: catalogue.length, indian: indianCount, typeCounts, languageCounts, providerMetadataTitles:providerTitles, providers:providerNames, providerRegions, quality: auditCatalogue(catalogue) });
   }
   if (url.pathname === "/catalog") {
     const query = url.searchParams.get("q") ?? "";
