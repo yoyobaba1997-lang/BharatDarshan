@@ -45,7 +45,7 @@ const server = http.createServer((req, res) => {
     const offset = Math.max(0, Number(url.searchParams.get("offset") || 0));
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
-  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog"] });
+  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves"] });
 });
 
 server.listen(PORT, "0.0.0.0", () => {
