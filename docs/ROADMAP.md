@@ -31,8 +31,8 @@
 - [x] Stage 10 — Catalogue insights dashboard and quality review
 - [x] Stage 11 — Corrected language-code registry and dynamic Indian-language discovery shelves
 - [x] Stage 12 — PWA installability and offline shell
-- [ ] Stage 13 — Ingestion pipeline safeguards, incremental refresh, and metadata source traceability
-- [ ] Stage 14 — Deployment readiness, environment validation, and operational health checks
-- [ ] Stage 15 — Adapter contracts and fixture-based compatibility layer (official specifications only)
-- [ ] Stage 16 — Accessibility, TV/remote navigation, and frontend runtime QA
+- [x] Stage 13 — Ingestion pipeline safeguards, incremental refresh, and metadata source traceability
+- [x] Stage 14 — Deployment readiness, environment validation, and operational health checks
+- [x] Stage 15 — Generic metadata adapter contract and fixture-based tests (official compatibility adapters pending)
+- [x] Stage 16 — Accessibility improvements; frontend runtime QA pending
 - [ ] Stage 17 — Final release checklist and deployment verification
