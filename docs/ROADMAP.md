@@ -97,3 +97,5 @@
 - [x] Stage 32 — Configurable deployment environment and compose ports
 
 - [x] Stage 33 — Manual HTTPS release smoke-check workflow
+
+- [x] Stage 34 — Catalogue provenance/freshness metadata endpoint
