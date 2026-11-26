@@ -73,3 +73,5 @@
 - [x] Stage 22 — Scheduled/manual catalogue refresh workflow created (requires TMDB secret; artifact only)
 
 - [x] Stage 24 — API input validation, security headers, and integration test coverage
+
+- [x] Stage 25 — Streaming platform discovery filters
