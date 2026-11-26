@@ -7,6 +7,27 @@
     "aliases": []
   },
   {
+    "code": "awa",
+    "name": "Awadhi",
+    "nativeName": "अवधी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "bfq",
+    "name": "Badaga",
+    "nativeName": "படக",
+    "script": "Tamil",
+    "aliases": []
+  },
+  {
+    "code": "bap",
+    "name": "Bajjika",
+    "nativeName": "बज्जिका",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
     "code": "bn",
     "name": "Bengali",
     "nativeName": "বাংলা",
@@ -14,9 +35,32 @@
     "aliases": []
   },
   {
-    "code": "bo",
+    "code": "bho",
+    "name": "Bhojpuri",
+    "nativeName": "भोजपुरी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "brx",
     "name": "Bodo",
     "nativeName": "बड़ो",
+    "script": "Devanagari",
+    "aliases": [
+      "Boro"
+    ]
+  },
+  {
+    "code": "hne",
+    "name": "Chhattisgarhi",
+    "nativeName": "छत्तीसगढ़ी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "dhd",
+    "name": "Dhodi",
+    "nativeName": "धोडी",
     "script": "Devanagari",
     "aliases": []
   },
@@ -28,6 +72,30 @@
     "aliases": []
   },
   {
+    "code": "en",
+    "name": "English",
+    "nativeName": "English",
+    "script": "Latin",
+    "aliases": []
+  },
+  {
+    "code": "grt",
+    "name": "Garo",
+    "nativeName": "A·chik",
+    "script": "Latin",
+    "aliases": []
+  },
+  {
+    "code": "gon",
+    "name": "Gondi",
+    "nativeName": "गोंडी",
+    "script": "Multiple",
+    "aliases": [
+      "Gond",
+      "Gondi languages"
+    ]
+  },
+  {
     "code": "gu",
     "name": "Gujarati",
     "nativeName": "ગુજરાતી",
@@ -35,9 +103,37 @@
     "aliases": []
   },
   {
+    "code": "gvr",
+    "name": "Gurung",
+    "nativeName": "तमु",
+    "script": "Multiple",
+    "aliases": []
+  },
+  {
+    "code": "har",
+    "name": "Haryanvi",
+    "nativeName": "हरियाणवी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
     "code": "hi",
     "name": "Hindi",
     "nativeName": "हिन्दी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "ho",
+    "name": "Ho",
+    "nativeName": "हो",
+    "script": "Warang Citi",
+    "aliases": []
+  },
+  {
+    "code": "xnr",
+    "name": "Kangri",
+    "nativeName": "कांगड़ी",
     "script": "Devanagari",
     "aliases": []
   },
@@ -56,10 +152,38 @@
     "aliases": []
   },
   {
+    "code": "kha",
+    "name": "Khasi",
+    "nativeName": "Ka Khasi",
+    "script": "Latin",
+    "aliases": []
+  },
+  {
     "code": "kok",
     "name": "Konkani",
     "nativeName": "कोंकणी",
     "script": "Multiple",
+    "aliases": []
+  },
+  {
+    "code": "kru",
+    "name": "Kurukh",
+    "nativeName": "कुड़ुख",
+    "script": "Multiple",
+    "aliases": []
+  },
+  {
+    "code": "lb",
+    "name": "Ladakhi",
+    "nativeName": "ལ་དྭགས",
+    "script": "Tibetan",
+    "aliases": []
+  },
+  {
+    "code": "mag",
+    "name": "Magahi",
+    "nativeName": "मगही",
+    "script": "Devanagari",
     "aliases": []
   },
   {
@@ -91,6 +215,27 @@
     "aliases": []
   },
   {
+    "code": "mwr",
+    "name": "Marwari",
+    "nativeName": "मारवाड़ी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "lus",
+    "name": "Mizo",
+    "nativeName": "Mizo",
+    "script": "Latin",
+    "aliases": []
+  },
+  {
+    "code": "unr",
+    "name": "Mundari",
+    "nativeName": "मुंडारी",
+    "script": "Multiple",
+    "aliases": []
+  },
+  {
     "code": "ne",
     "name": "Nepali",
     "nativeName": "नेपाली",
@@ -105,10 +250,47 @@
     "aliases": []
   },
   {
+    "code": "pi",
+    "name": "Pali",
+    "nativeName": "पालि",
+    "script": "Devanagari",
+    "aliases": [
+      "Pāli"
+    ]
+  },
+  {
     "code": "pa",
     "name": "Punjabi",
     "nativeName": "ਪੰਜਾਬੀ",
     "script": "Gurmukhi",
+    "aliases": []
+  },
+  {
+    "code": "pnb",
+    "name": "Punjabi (Shahmukhi)",
+    "nativeName": "پنجابی",
+    "script": "Arabic",
+    "aliases": []
+  },
+  {
+    "code": "raj",
+    "name": "Rajasthani",
+    "nativeName": "राजस्थानी",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "rkt",
+    "name": "Riksh",
+    "nativeName": "रिक्ष",
+    "script": "Devanagari",
+    "aliases": []
+  },
+  {
+    "code": "sck",
+    "name": "Sadri",
+    "nativeName": "सादरी",
+    "script": "Devanagari",
     "aliases": []
   },
   {
@@ -123,6 +305,13 @@
     "name": "Santali",
     "nativeName": "ᱥᱟᱱᱛᱟᱲᱤ",
     "script": "Ol Chiki",
+    "aliases": []
+  },
+  {
+    "code": "syr",
+    "name": "Saurashtra",
+    "nativeName": "સૌરાષ્ટ્ર",
+    "script": "Saurashtra",
     "aliases": []
   },
   {
@@ -147,52 +336,19 @@
     "aliases": []
   },
   {
-    "code": "ur",
-    "name": "Urdu",
-    "nativeName": "اردو",
-    "script": "Arabic",
-    "aliases": []
+    "code": "bo",
+    "name": "Tibetan",
+    "nativeName": "བོད་སྐད་",
+    "script": "Tibetan",
+    "aliases": [
+      "Bod"
+    ]
   },
   {
-    "code": "en",
-    "name": "English",
-    "nativeName": "English",
-    "script": "Latin",
-    "aliases": []
-  },
-  {
-    "code": "awa",
-    "name": "Awadhi",
-    "nativeName": "अवधी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "bho",
-    "name": "Bhojpuri",
-    "nativeName": "भोजपुरी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "hne",
-    "name": "Chhattisgarhi",
-    "nativeName": "छत्तीसगढ़ी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "raj",
-    "name": "Rajasthani",
-    "nativeName": "राजस्थानी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "har",
-    "name": "Haryanvi",
-    "nativeName": "हरियाणवी",
-    "script": "Devanagari",
+    "code": "trp",
+    "name": "Tripuri/Kokborok",
+    "nativeName": "त्रिपुरी/कोकबोरोक",
+    "script": "Multiple",
     "aliases": []
   },
   {
@@ -203,143 +359,10 @@
     "aliases": []
   },
   {
-    "code": "kha",
-    "name": "Khasi",
-    "nativeName": "Ka Khasi",
-    "script": "Latin",
-    "aliases": []
-  },
-  {
-    "code": "grt",
-    "name": "Garo",
-    "nativeName": "A·chik",
-    "script": "Latin",
-    "aliases": []
-  },
-  {
-    "code": "lus",
-    "name": "Mizo",
-    "nativeName": "Mizo",
-    "script": "Latin",
-    "aliases": []
-  },
-  {
-    "code": "trp",
-    "name": "Tripuri/Kokborok",
-    "nativeName": "त्रिपुरी/कोकबोरोक",
-    "script": "Multiple",
-    "aliases": []
-  },
-  {
-    "code": "brx",
-    "name": "Brokskat",
-    "nativeName": "ब्रोस्कत",
-    "script": "Multiple",
-    "aliases": []
-  },
-  {
-    "code": "lb",
-    "name": "Ladakhi",
-    "nativeName": "ལ་དྭགས",
-    "script": "Tibetan",
-    "aliases": []
-  },
-  {
-    "code": "mwr",
-    "name": "Marwari",
-    "nativeName": "मारवाड़ी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "mag",
-    "name": "Magahi",
-    "nativeName": "मगही",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "sck",
-    "name": "Sadri",
-    "nativeName": "सादरी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "bap",
-    "name": "Bajjika",
-    "nativeName": "बज्जिका",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "dhd",
-    "name": "Dhodi",
-    "nativeName": "धोडी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "rkt",
-    "name": "Riksh",
-    "nativeName": "रिक्ष",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "pnb",
-    "name": "Punjabi (Shahmukhi)",
-    "nativeName": "پنجابی",
+    "code": "ur",
+    "name": "Urdu",
+    "nativeName": "اردو",
     "script": "Arabic",
-    "aliases": []
-  },
-  {
-    "code": "syr",
-    "name": "Saurashtra",
-    "nativeName": "સૌરાષ્ટ્ર",
-    "script": "Saurashtra",
-    "aliases": []
-  },
-  {
-    "code": "kru",
-    "name": "Kurukh",
-    "nativeName": "कुड़ुख",
-    "script": "Multiple",
-    "aliases": []
-  },
-  {
-    "code": "ho",
-    "name": "Ho",
-    "nativeName": "हो",
-    "script": "Warang Citi",
-    "aliases": []
-  },
-  {
-    "code": "unr",
-    "name": "Mundari",
-    "nativeName": "मुंडारी",
-    "script": "Multiple",
-    "aliases": []
-  },
-  {
-    "code": "xnr",
-    "name": "Kangri",
-    "nativeName": "कांगड़ी",
-    "script": "Devanagari",
-    "aliases": []
-  },
-  {
-    "code": "bfq",
-    "name": "Badaga",
-    "nativeName": "படக",
-    "script": "Tamil",
-    "aliases": []
-  },
-  {
-    "code": "gvr",
-    "name": "Gurung",
-    "nativeName": "तमु",
-    "script": "Multiple",
     "aliases": []
   }
 ]
