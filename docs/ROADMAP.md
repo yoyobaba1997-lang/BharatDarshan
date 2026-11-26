@@ -101,3 +101,5 @@
 - [x] Stage 34 — Catalogue provenance/freshness metadata endpoint
 
 - [x] Stage 35 — Dashboard catalogue source and snapshot freshness indicators
+
+- [x] Stage 36 — Provider metadata coverage and timestamp freshness audit
