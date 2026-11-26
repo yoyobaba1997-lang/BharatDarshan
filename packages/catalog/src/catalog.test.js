@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalizeTitle, searchCatalogue, validateCatalogue, languageRegistry, getLanguage, streamingPlatforms, classifyTitle, buildCatalogueShelves } from "./catalog.js";
+import { normalizeTitle, searchCatalogue, validateCatalogue, auditCatalogue, languageRegistry, getLanguage, streamingPlatforms, classifyTitle, buildCatalogueShelves } from "./catalog.js";
 import sample from "./sample-catalog.json" with { type: "json" };
 
 test("platform registry includes Indian and international OTT services", () => {
@@ -68,4 +68,26 @@ test("classification preserves imported discovery tags and handles case-insensit
   const shelves=buildCatalogueShelves([item]);
   assert.equal(shelves.Trending.length,1);
   assert.equal(shelves.Popular.length,1);
+});
+
+
+test("catalogue audit reports missing metadata, invalid rating and duplicate titles", () => {
+  const report = auditCatalogue([
+    { id:"a", title:"Same Film", type:"movie", year:2020, poster:"poster.jpg", overview:"Synopsis", genres:["Drama"], languages:["hi"], rating:8 },
+    { id:"b", title:"Same Film", type:"movie", year:2020, rating:12 },
+    { id:"c", title:"Incomplete", type:"series", rating:-1 }
+  ]);
+  assert.equal(report.counts.total,3);
+  assert.equal(report.counts.duplicateTitles,1);
+  assert.equal(report.counts.invalidRatings,2);
+  assert.ok(report.issues.some(issue=>issue.code==="missing_poster"));
+  assert.ok(report.issues.some(issue=>issue.code==="missing_overview"));
+  assert.ok(report.issues.some(issue=>issue.code==="missing_languages"));
+  assert.ok(report.completenessPercent < 100);
+});
+
+test("catalogue audit treats an empty catalogue as 100 percent completeness", () => {
+  const report=auditCatalogue([]);
+  assert.equal(report.completenessPercent,100);
+  assert.equal(report.issues.length,0);
 });
