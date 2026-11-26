@@ -6,7 +6,9 @@ import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatfo
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const samplePath = path.resolve(here, "../../../packages/catalog/src/sample-catalog.json");
-const catalogue = JSON.parse(fs.readFileSync(samplePath, "utf8")).map(normalizeTitle);
+const ingestedPath = path.resolve(here, "../../../packages/catalog/src/ingested-catalog.json");
+const activePath = fs.existsSync(ingestedPath) ? ingestedPath : samplePath;
+const catalogue = JSON.parse(fs.readFileSync(activePath, "utf8")).map(normalizeTitle);
 const PORT = Number(process.env.PORT || 3000);
 
 function send(res, status, body) {
