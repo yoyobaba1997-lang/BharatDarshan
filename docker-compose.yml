@@ -5,6 +5,7 @@ services:
       dockerfile: apps/api/Dockerfile
     environment:
       PORT: 3000
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN:-*}
     ports:
       - "3000:3000"
     restart: unless-stopped
