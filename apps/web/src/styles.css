@@ -25,3 +25,6 @@
 
 /* Stage 19: watchlist portability controls */
 .watchlist-tools{display:flex;align-items:center;gap:10px}.watchlist-tools button{border:1px solid #303948;border-radius:8px;padding:7px 10px;background:#171c25;color:#f5b36d;cursor:pointer}@media(max-width:600px){.watchlist-tools{gap:6px}.watchlist-tools button{font-size:11px;padding:6px 8px}}
+
+/* Stage 23: source attribution */
+.tmdb-attribution a{color:#f6b36e;text-decoration:underline;text-underline-offset:3px}.tmdb-attribution{max-width:900px}
