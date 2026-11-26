@@ -53,6 +53,9 @@
 **Release status:** Source implementation is in place; production release remains blocked on external credentials, live deployment, CI verification, and runtime QA.
 
 - [x] Stage 18 — Personal local watchlist/My List
-- [ ] Stage 19 — User account sync and cloud watchlist (requires secure auth/backend decision)
-- [ ] Stage 20 — Live provider availability data and source/region/time provenance (authorized data source review required)
+- [x] Stage 19 — Watchlist portability via validated JSON import/export (cloud sync remains future work)
+- [x] Stage 20 — Optional TMDB provider-availability metadata integration with region/source/time provenance (real enrichment run pending credentials)
 - [ ] Stage 21 — Live browser/device QA and production release verification
+
+- [ ] Stage 22 — Secure account system/cloud watchlist sync (requires auth/security design and hosting decision)
+- [ ] Stage 23 — Final live provider enrichment run and review
