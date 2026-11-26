@@ -40,7 +40,7 @@
 - [x] API and web health checks
 - [x] GitHub Actions CI workflow (latest run still requires verification)
 - [x] Release and deployment checklist documentation
-- [ ] CI latest run verified green
+- [x] CI latest run verified green (run 45893141187; npm test, npm run check, and Docker builds passed)
 - [ ] Source/legal/attribution review
 - [ ] Production deployment and live health checks
 - [ ] Browser/mobile/Fire TV runtime QA
