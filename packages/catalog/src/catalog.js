@@ -71,7 +71,7 @@ export function validateCatalogue(items) {
 export function auditCatalogue(items) {
   const issues = [];
   const duplicateKeys = new Map();
-  const counts = { total: items.length, missingPoster: 0, missingOverview: 0, missingYear: 0, missingGenres: 0, missingLanguages: 0, duplicateTitles: 0, invalidRatings: 0 };
+  const counts = { total: items.length, missingPoster: 0, missingOverview: 0, missingYear: 0, missingGenres: 0, missingLanguages: 0, duplicateTitles: 0, invalidRatings: 0, providerMetadataTitles: 0, providerRecords: 0, staleProviderRecords: 0, missingProviderCheckedAt: 0 };
   const normalizedTitles = value => String(value ?? "").trim().toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
   items.forEach((raw, index) => {
     const id = raw?.id ?? null;
@@ -83,6 +83,7 @@ export function auditCatalogue(items) {
     if (!Array.isArray(raw?.genres) || raw.genres.length === 0) { counts.missingGenres++; add("missing_genres", "Genre metadata is missing"); }
     if (!Array.isArray(raw?.languages) || raw.languages.length === 0) { counts.missingLanguages++; add("missing_languages", "Primary language metadata is missing"); }
     if (raw?.rating != null && (!Number.isFinite(Number(raw.rating)) || Number(raw.rating) < 0 || Number(raw.rating) > 10)) { counts.invalidRatings++; add("invalid_rating", "Rating is outside the expected 0–10 range"); }
+    const providers=Array.isArray(raw?.providerAvailability)?raw.providerAvailability:[];if(providers.length)counts.providerMetadataTitles++;counts.providerRecords+=providers.length;providers.forEach(record=>{if(!record.checkedAt){counts.missingProviderCheckedAt++;add("provider_missing_timestamp","Provider metadata lacks a checked timestamp");}else{const date=Date.parse(record.checkedAt);if(!Number.isFinite(date)||date>Date.now()+86400000||Date.now()-date>30*86400000){counts.staleProviderRecords++;add("provider_stale","Provider metadata timestamp is invalid, future-dated, or older than 30 days");}}});
     const key = [normalizedTitles(title), String(raw?.year ?? raw?.releaseDate?.slice?.(0,4) ?? ""), String(raw?.type ?? "")].join("|");
     if (title && duplicateKeys.has(key)) { counts.duplicateTitles++; add("possible_duplicate", "Possible duplicate title/year/type; compare metadata before merging"); }
     else if (title) duplicateKeys.set(key, id);
