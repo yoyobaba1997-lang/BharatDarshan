@@ -44,7 +44,7 @@ jobs:
           INGEST_TYPES: "movie,tv"
           INGEST_MODES: "trending,popular,top_rated,indian_languages"
           INGEST_LANGUAGES: "hi,ta,te,ml,kn,bn,mr,gu,pa,or,as,ur"
-          INGEST_PROVIDER_AVAILABILITY: ${{ github.event.inputs.provider_enrichment || 'false' == 'true' && '1' || '0' }}
+          INGEST_PROVIDER_AVAILABILITY: ${{ github.event.inputs.provider_enrichment == 'true' && '1' || '0' }}
           INGEST_PROVIDER_LIMIT: ${{ github.event.inputs.provider_limit || '100' }}
           INGEST_PROVIDER_REGIONS: "IN,US,GB"
           INGEST_REPLACE: "1"
