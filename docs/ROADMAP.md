@@ -91,3 +91,5 @@
 - [x] Stage 29 — Expanded API integration coverage for security, filters, exports and validation
 
 - [x] Stage 30 — Consolidated production release checklist (live validation remains pending)
+
+- [x] Stage 31 — Dependency-free API deployment smoke-test script
