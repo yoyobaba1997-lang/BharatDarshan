@@ -1,0 +1,35 @@
+[
+  {
+    "id": "tmdb",
+    "name": "The Movie Database (TMDB)",
+    "kind": "metadata-api",
+    "status": "implemented",
+    "supports": [
+      "movie",
+      "series",
+      "anime"
+    ],
+    "termsNote": "Requires API key and attribution; confirm current terms and licensing before production or commercial use."
+  },
+  {
+    "id": "official-provider-pages",
+    "name": "Official streaming service pages",
+    "kind": "availability-source",
+    "status": "planned",
+    "supports": [
+      "providerAvailability"
+    ],
+    "termsNote": "Use authorized public metadata/API or official links; no unauthorized scraping."
+  },
+  {
+    "id": "community-curation",
+    "name": "Community curation",
+    "kind": "manual",
+    "status": "planned",
+    "supports": [
+      "aliases",
+      "languages",
+      "regionalMetadata"
+    ]
+  }
+]
