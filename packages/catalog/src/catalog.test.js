@@ -1,7 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalizeTitle, searchCatalogue, validateCatalogue, languageRegistry, getLanguage } from "./catalog.js";
+import { normalizeTitle, searchCatalogue, validateCatalogue, languageRegistry, getLanguage, streamingPlatforms } from "./catalog.js";
 import sample from "./sample-catalog.json" with { type: "json" };
+
+test("platform registry includes Indian and international OTT services", () => {
+  const names=streamingPlatforms.map(p=>p.name);
+  for (const name of ["ZEE5","Sony LIV","JioHotstar","Prime Video","Netflix","aha","hoichoi","Sun NXT"]) assert.ok(names.includes(name));
+});
 
 test("language registry includes Indian languages and is searchable by code", () => {
   assert.ok(languageRegistry.length >= 40);
