@@ -29,7 +29,7 @@ $("search-toggle").onclick=()=>{$("search-panel").classList.toggle("hidden");$("
 $("search-close").onclick=()=>{$("search-panel").classList.add("hidden");query="";$("search-input").value="";render();};
 $("search-input").oninput=e=>{query=e.target.value;render();};
 $("explore-btn").onclick=()=>document.querySelector(".shelf").scrollIntoView({behavior:"smooth"});$("hero-details-btn").onclick=()=>{if(heroSlides[heroIndex])showDetails(heroSlides[heroIndex]);};
-$("details-btn").onclick=()=>alert("BharatDarshan is a metadata and discovery project. Official availability depends on provider rights and region.");
+
 $("detail-close").onclick=closeDetails;$("detail-modal").onclick=e=>{if(e.target===$("detail-modal"))closeDetails();};document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetails();});
 $("genre-filter").onchange=e=>{activeGenre=e.target.value;render();};$("year-filter").onchange=e=>{activeYear=e.target.value;render();};$("region-filter").onchange=e=>{activeRegion=e.target.value;render();};$("sort-filter").onchange=e=>{sortMode=e.target.value;render();};$("reset-filters").onclick=()=>{activeGenre=activeYear=activeRegion=activeLanguage=activeType=query="";sortMode="default";$("genre-filter").value=$("year-filter").value=$("region-filter").value=$("sort-filter").value=$("language-select").value=$("search-input").value="";document.querySelectorAll(".chip").forEach((x,i)=>x.classList.toggle("selected",i===0));updateLanguageChips();render();};
 // Keyboard/TV remote navigation between poster cards and shelf rows.
