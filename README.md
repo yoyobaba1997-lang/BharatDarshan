@@ -130,3 +130,11 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Enrichment is opt-in and bounded: `INGEST_PROVIDER_AVAILABILITY=1`, `INGEST_PROVIDER_LIMIT`, and `INGEST_PROVIDER_REGIONS`.
 - Provider coverage metrics are exposed in `/stats` and the dashboard.
 - Provider metadata is not a playback link; availability can change and should be refreshed.
+
+
+## Stage 22 — Scheduled Catalogue Refresh
+- Weekly scheduled GitHub Actions ingestion and manual workflow dispatch.
+- Requires the repository secret `TMDB_READ_ACCESS_TOKEN`.
+- Refresh validates and audits the snapshot, then uploads a 30-day artifact.
+- Optional bounded provider enrichment can be enabled on manual runs.
+- Refresh artifacts are not automatically deployed or committed; release/deployment remains a deliberate step.
