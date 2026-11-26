@@ -30,6 +30,8 @@ test("search supports title query and language/audio/dub filters", () => {
   assert.equal(searchCatalogue(sample,"",{genre:"Adventure"}).length,1);
 });
 
+test("search filters by streaming platform metadata",()=>{const items=[{id:"p1",title:"Platform Film",streamingPlatforms:["Netflix"]},{id:"p2",title:"Other",providerAvailability:[{platform:"ZEE5"}]}];assert.equal(searchCatalogue(items,"",{platform:"Netflix"}).length,1);assert.equal(searchCatalogue(items,"",{platform:"ZEE5"}).length,1);});
+
 test("validation detects duplicate IDs and missing title", () => {
   const issues=validateCatalogue([{id:"same",title:"One",type:"movie"},{id:"same",title:"Two",type:"movie"},{id:"missing",title:""}]);
   assert.ok(issues.some(issue=>issue.error==="Duplicate id"));
