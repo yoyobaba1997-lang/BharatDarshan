@@ -103,3 +103,5 @@
 - [x] Stage 35 — Dashboard catalogue source and snapshot freshness indicators
 
 - [x] Stage 36 — Provider metadata coverage and timestamp freshness audit
+
+- [x] Stage 37 — Web app smoke-test script and combined manual release verification workflow
