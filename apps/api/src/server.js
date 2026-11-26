@@ -2,7 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatforms, normalizeTitle, buildCatalogueShelves } from "../../../packages/catalog/src/catalog.js";
+import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatforms, normalizeTitle, buildCatalogueShelves, auditCatalogue } from "../../../packages/catalog/src/catalog.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const samplePath = path.resolve(here, "../../../packages/catalog/src/sample-catalog.json");
@@ -31,6 +31,7 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/categories") return send(res, 200, catalogueCategories);
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
   if (url.pathname === "/shelves") return send(res, 200, Object.fromEntries(Object.entries(buildCatalogueShelves(catalogue)).map(([name, items]) => [name, items.length])));
+  if (url.pathname === "/quality") return send(res, 200, auditCatalogue(catalogue));
   if (url.pathname === "/catalog") {
     const query = url.searchParams.get("q") ?? "";
     const filters = {
@@ -45,7 +46,7 @@ const server = http.createServer((req, res) => {
     const offset = Math.max(0, Number(url.searchParams.get("offset") || 0));
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
-  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves"] });
+  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality"] });
 });
 
 server.listen(PORT, "0.0.0.0", () => {
