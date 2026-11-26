@@ -13,6 +13,6 @@ http.createServer((req,res) => {
   const resolved = path.resolve(root, file);
   if (!resolved.startsWith(root + path.sep) && resolved !== root) { res.writeHead(403); return res.end("Forbidden"); }
   if (!fs.existsSync(resolved) || !fs.statSync(resolved).isFile()) { res.writeHead(404); return res.end("Not found"); }
-  res.writeHead(200, { "content-type": mime[path.extname(resolved)] || "application/octet-stream", "cache-control":"no-cache" });
+  res.writeHead(200, { "content-type": mime[path.extname(resolved)] || "application/octet-stream", "cache-control":"no-cache", "x-content-type-options":"nosniff", "x-frame-options":"DENY", "referrer-policy":"strict-origin-when-cross-origin", "permissions-policy":"camera=(), microphone=(), geolocation=()" });
   if(resolved===path.join(root,"index.html")){let html=fs.readFileSync(resolved,"utf8");const api=process.env.BHARATDARSHAN_API;if(api)html=html.replace("</head>",`<script>window.BHARATDARSHAN_API=${JSON.stringify(api)};</script></head>`);res.end(html);return;}fs.createReadStream(resolved).pipe(res);
 }).listen(port, "0.0.0.0", () => console.log(`BharatDarshan Web running on http://localhost:${port}`));
