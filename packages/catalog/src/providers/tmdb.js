@@ -77,3 +77,13 @@ export async function discoverTmdb(kind = "movie", params = {}) {
   const data = await tmdbRequest(`/discover/${kind}`, { region: "IN", ...params });
   return { page: data.page, totalPages: data.total_pages, results: (data.results ?? []).map(raw => normalizeTmdbResult(raw, kind === "tv" ? "tv" : "movie")) };
 }
+
+export async function fetchCatalogueList(kind = "movie", list = "popular", page = 1, region = "IN") {
+  const endpoint = list === "top_rated" ? `/${kind}/top_rated` : `/${kind}/popular`;
+  const data = await tmdbRequest(endpoint, { page, region });
+  return { page: data.page, totalPages: data.total_pages, results: (data.results ?? []).map(raw => normalizeTmdbResult(raw, kind === "tv" ? "tv" : "movie")) };
+}
+
+export async function discoverByLanguage(kind = "movie", language = "hi", page = 1, params = {}) {
+  return discoverTmdb(kind, { with_original_language: language, page, sort_by: "popularity.desc", ...params });
+}
