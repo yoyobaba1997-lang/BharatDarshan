@@ -57,3 +57,15 @@ test("shelf builder returns classified collections", () => {
   assert.equal(shelves["Indian Cinema"].length, 1);
   assert.equal(shelves.Anime.length, 1);
 });
+
+test("classification preserves imported discovery tags and handles case-insensitive Hindi metadata", () => {
+  const item=classifyTitle({id:"x",title:"Discovery",type:"movie",tags:["Trending","Popular"],dubLanguages:["HI"],audioLanguages:["hi"]});
+  assert.ok(item.tags.includes("trending"));
+  assert.ok(item.tags.includes("popular"));
+  assert.ok(item.tags.includes("hindi-dubbed"));
+  assert.ok(item.collections.includes("Hindi-Dubbed"));
+  assert.ok(item.collections.includes("Hindi Audio"));
+  const shelves=buildCatalogueShelves([item]);
+  assert.equal(shelves.Trending.length,1);
+  assert.equal(shelves.Popular.length,1);
+});
