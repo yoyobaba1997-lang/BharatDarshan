@@ -159,3 +159,8 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Catalogue core and API support platform filtering.
 - Filtering uses normalized platform metadata or region-aware provider availability records.
 - Platform filter works alongside language, genre, year, region, type, and search.
+
+
+## Stage 26 — Provider Detail Transparency
+- Provider availability detail rows show platform, region, category (subscription/free/ad-supported/rent/buy), last-checked date, and source link.
+- Metadata is clearly separated from playback links; TMDB links lead to provider-information pages.
