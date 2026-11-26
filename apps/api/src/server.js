@@ -18,6 +18,7 @@ function send(res, status, body) {
   res.end(JSON.stringify(body, null, 2));
 }
 
+const rateBuckets=new Map();const RATE_LIMIT=120;const RATE_WINDOW_MS=60000;function checkRateLimit(ip){const now=Date.now();const bucket=rateBuckets.get(ip);if(!bucket||now-bucket.startedAt>=RATE_WINDOW_MS){rateBuckets.set(ip,{startedAt:now,count:1});return true;}bucket.count++;return bucket.count<=RATE_LIMIT;}setInterval(()=>{const now=Date.now();for(const [ip,bucket] of rateBuckets)if(now-bucket.startedAt>=RATE_WINDOW_MS)rateBuckets.delete(ip);},RATE_WINDOW_MS).unref();
 const server = http.createServer((req, res) => {
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
@@ -27,6 +28,7 @@ const server = http.createServer((req, res) => {
     });
     return res.end();
   }
+  const clientIp=req.socket.remoteAddress||"unknown";if(!checkRateLimit(clientIp)){res.writeHead(429,{"content-type":"application/json; charset=utf-8","retry-after":"60","x-content-type-options":"nosniff"});return res.end(JSON.stringify({error:"Rate limit exceeded. Retry in about one minute."}));}
   const url = new URL(req.url, "http://localhost");
   if (url.pathname === "/health") return send(res, 200, { ok: true, name: "BharatDarshan API", version: "0.1.0", catalogueCount: catalogue.length, catalogueSource: path.basename(activePath), checkedAt: new Date().toISOString() });
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
