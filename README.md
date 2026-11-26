@@ -181,3 +181,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 
 ## Verified CI
 The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c100f993ade9b374ef5ee95c0`. It passed workspace tests, syntax checks, and API/web Docker image builds.
+
+
+## Stage 26 — Provider Availability Detail UI
+- Title details include provider, region, availability category, and checked date when metadata is present.
+- Provider source links open the corresponding TMDB watch page in a separate tab.
+- A freshness disclaimer warns that regional availability changes and should be checked before purchase/subscription.
+- Provider records are metadata only; no playback URLs are provided.
