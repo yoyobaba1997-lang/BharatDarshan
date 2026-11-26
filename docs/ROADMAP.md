@@ -1,24 +1,27 @@
 # BharatDarshan Roadmap
 
 ## Foundation
-- [x] Repository/project scope
-- [x] Starter language registry and discovery shelves
-- [x] Architecture and source policy
-- [ ] Metadata schema and catalogue core
+- [x] Repository and project scope
+- [x] Starter catalogue categories
+- [x] Language registry (growing starter list)
+- [x] Metadata schema and catalogue core
+- [x] Search/filter functions and validation
+- [x] Initial API endpoints
 
-## Catalogue/UI
-- [ ] Metadata provider interfaces and attribution
-- [ ] Search, pagination and language/genre/year/region/type filters
-- [ ] Responsive streaming-style catalogue UI
-- [ ] Anime classifications and audio/dub/subtitle metadata
+## Catalogue & UI
+- [ ] Metadata provider interfaces and source attribution
+- [x] Search filters (type, language, genre, region, year) in core
+- [ ] Responsive streaming-style web UI
+- [x] Anime classification and audio/dub/subtitle fields in model
 
 ## Integrations
-- [ ] Adapter contract and fixtures
+- [ ] Adapter contract and fixture tests
 - [ ] Nuvio adapter (verify current interface first)
 - [ ] Stremio-compatible adapter (verify official spec)
-- [ ] Generic catalogue API
+- [x] Generic catalogue API starter
 
 ## Quality
-- [ ] Tests and CI
+- [x] Catalogue unit tests added
+- [ ] Run tests in CI and verify results
 - [ ] Source/legal review
 - [ ] Deployment configuration
