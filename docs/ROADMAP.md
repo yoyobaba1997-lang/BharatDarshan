@@ -76,12 +76,6 @@
 
 - [x] Stage 25 — Streaming platform discovery filters
 
-- [x] Stage 26 — Provider availability details, region/category/source transparency
-
-- [x] Stage 27 — Recently Viewed history and clear-history control
-
-- [x] Stage 28 — Web server runtime smoke tests for PWA assets, API config, and security headers
-
 - [x] Stage 26 — Provider availability details in title modal, source links, region/category/timestamp and freshness disclaimer
 
 - [x] Stage 27 — Bounded local catalogue cache with offline fallback
@@ -107,3 +101,10 @@
 - [x] Stage 37 — Web app smoke-test script and combined manual release verification workflow
 
 - [x] Stage 38 — Process-local API per-IP rate limiting
+
+- [x] Stage 39 — Configurable per-IP API rate limit and Retry-After response; operational settings documented
+
+## Next implementation stages
+- [ ] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
+- [ ] Stage 41 — Consolidate roadmap and release-status reporting
+- [ ] Stage 42 — Security/error-handling review and production runtime verification
