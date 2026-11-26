@@ -145,3 +145,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Official TMDB attribution/logo guidance linked.
 - Source policy documents non-commercial attribution and commercial licensing review requirements.
 - The official approved TMDB logo still needs to be integrated before production release.
+
+
+## Stage 24 — API & Web Security Hardening
+- API and web responses include security headers.
+- API search and pagination inputs are validated and bounded.
+- API integration test exercises health, catalogue pagination, stats, quality, export, and invalid parameters.
+- CORS remains configurable via `ALLOWED_ORIGIN`; default is open for public read-only API usage.
