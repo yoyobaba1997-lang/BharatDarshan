@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalizeTmdbResult } from "./tmdb.js";
+import { normalizeTmdbResult, normalizeWatchProviderResults } from "./tmdb.js";
 
 test("TMDB movie result is normalized with stable source ID", () => {
   const movie=normalizeTmdbResult({id:123,title:"Example",original_title:"Example Original",overview:"Plot",release_date:"2025-05-01",original_language:"hi",genre_ids:[18],poster_path:"/poster.jpg",backdrop_path:"/back.jpg",vote_average:8.1},"movie",new Map([[18,"Drama"]]));
@@ -19,3 +19,5 @@ test("TMDB TV result uses series fields", () => {
   assert.equal(show.year,2024);
   assert.deepEqual(show.genres,["Action & Adventure"]);
 });
+
+test("TMDB watch providers are normalized with region, type, and source provenance",()=>{const out=normalizeWatchProviderResults({results:{IN:{link:"https://www.themoviedb.org/movie/1/watch",flatrate:[{provider_id:8,provider_name:"Example OTT",logo_path:"/logo.png"}],rent:[{provider_id:9,provider_name:"Rent Store"}]}}},["IN"]);assert.equal(out.length,2);assert.equal(out[0].region,"IN");assert.equal(out[0].availabilityType,"flatrate");assert.equal(out[0].source,"TMDB");assert.equal(out[0].sourceUrl,"https://www.themoviedb.org/movie/1/watch");});
