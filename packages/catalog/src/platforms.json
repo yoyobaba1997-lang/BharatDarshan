@@ -1,0 +1,247 @@
+[
+  {
+    "id": "netflix",
+    "name": "Netflix",
+    "region": "Global",
+    "contentFocus": [
+      "Originals",
+      "Movies",
+      "Series"
+    ]
+  },
+  {
+    "id": "prime-video",
+    "name": "Prime Video",
+    "region": "Global",
+    "contentFocus": [
+      "Originals",
+      "Movies",
+      "Series"
+    ]
+  },
+  {
+    "id": "jiohotstar",
+    "name": "JioHotstar",
+    "region": "India",
+    "contentFocus": [
+      "Indian TV",
+      "Sports",
+      "Movies",
+      "Series"
+    ]
+  },
+  {
+    "id": "sonyliv",
+    "name": "Sony LIV",
+    "region": "India",
+    "contentFocus": [
+      "TV",
+      "Sports",
+      "Originals",
+      "Movies"
+    ]
+  },
+  {
+    "id": "zee5",
+    "name": "ZEE5",
+    "region": "India",
+    "contentFocus": [
+      "Indian Originals",
+      "TV",
+      "Movies",
+      "Regional"
+    ]
+  },
+  {
+    "id": "amazon-mx-player",
+    "name": "Amazon MX Player",
+    "region": "India",
+    "contentFocus": [
+      "Free streaming",
+      "Originals",
+      "Series"
+    ]
+  },
+  {
+    "id": "aha",
+    "name": "aha",
+    "region": "India",
+    "contentFocus": [
+      "Telugu",
+      "Tamil"
+    ]
+  },
+  {
+    "id": "hoichoi",
+    "name": "hoichoi",
+    "region": "India",
+    "contentFocus": [
+      "Bengali"
+    ]
+  },
+  {
+    "id": "sun-nxt",
+    "name": "Sun NXT",
+    "region": "India",
+    "contentFocus": [
+      "Tamil",
+      "Telugu",
+      "Malayalam",
+      "Kannada"
+    ]
+  },
+  {
+    "id": "manorama-max",
+    "name": "ManoramaMAX",
+    "region": "India",
+    "contentFocus": [
+      "Malayalam"
+    ]
+  },
+  {
+    "id": "chaupal",
+    "name": "Chaupal",
+    "region": "India",
+    "contentFocus": [
+      "Punjabi",
+      "Haryanvi",
+      "Bhojpuri"
+    ]
+  },
+  {
+    "id": "shemaroome",
+    "name": "ShemarooMe",
+    "region": "India",
+    "contentFocus": [
+      "Indian classics",
+      "Regional",
+      "Movies"
+    ]
+  },
+  {
+    "id": "eros-now",
+    "name": "Eros Now",
+    "region": "India",
+    "contentFocus": [
+      "Hindi",
+      "Indian movies"
+    ]
+  },
+  {
+    "id": "lionsgate-play",
+    "name": "Lionsgate Play",
+    "region": "India",
+    "contentFocus": [
+      "International",
+      "Movies",
+      "Series"
+    ]
+  },
+  {
+    "id": "planet-marathi",
+    "name": "Planet Marathi OTT",
+    "region": "India",
+    "contentFocus": [
+      "Marathi"
+    ]
+  },
+  {
+    "id": "klik",
+    "name": "KLiKK",
+    "region": "India",
+    "contentFocus": [
+      "Bengali",
+      "Regional"
+    ]
+  },
+  {
+    "id": "simply-south",
+    "name": "Simply South",
+    "region": "India",
+    "contentFocus": [
+      "South Indian cinema"
+    ]
+  },
+  {
+    "id": "viki",
+    "name": "Rakuten Viki",
+    "region": "Global",
+    "contentFocus": [
+      "Korean",
+      "Asian dramas"
+    ]
+  },
+  {
+    "id": "iqiyi",
+    "name": "iQIYI",
+    "region": "Global",
+    "contentFocus": [
+      "Asian dramas",
+      "Movies"
+    ]
+  },
+  {
+    "id": "crunchyroll",
+    "name": "Crunchyroll",
+    "region": "Global",
+    "contentFocus": [
+      "Anime"
+    ]
+  },
+  {
+    "id": "apple-tv",
+    "name": "Apple TV",
+    "region": "Global",
+    "contentFocus": [
+      "Originals",
+      "Movies",
+      "Series"
+    ]
+  },
+  {
+    "id": "discovery-plus",
+    "name": "Discovery+",
+    "region": "India/Global",
+    "contentFocus": [
+      "Documentary",
+      "Reality"
+    ]
+  },
+  {
+    "id": "curiosity-stream",
+    "name": "Curiosity Stream",
+    "region": "Global",
+    "contentFocus": [
+      "Documentary"
+    ]
+  },
+  {
+    "id": "tubi",
+    "name": "Tubi",
+    "region": "Global",
+    "contentFocus": [
+      "Free streaming",
+      "Movies",
+      "Series"
+    ]
+  },
+  {
+    "id": "plex",
+    "name": "Plex",
+    "region": "Global",
+    "contentFocus": [
+      "Free streaming",
+      "Personal media"
+    ]
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "region": "Global",
+    "contentFocus": [
+      "Official channels",
+      "Movies",
+      "Creator content"
+    ]
+  }
+]
