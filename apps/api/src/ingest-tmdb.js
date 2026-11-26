@@ -50,5 +50,6 @@ for (const rawItem of all) {
     dubLanguages:union(previous.dubLanguages,item.dubLanguages),regions:union(previous.regions,item.regions)
   });
 }
+const finalItems=[...merged.values()];const structuralIssues=[];const seenIds=new Set();for(const item of finalItems){if(!item.id)structuralIssues.push("Missing id");if(!item.title?.trim())structuralIssues.push(`Missing title for ${item.id||"record"}`);if(!["movie","series","anime","episode"].includes(item.type))structuralIssues.push(`Unsupported type ${item.type} for ${item.id}`);if(seenIds.has(item.id))structuralIssues.push(`Duplicate id ${item.id}`);seenIds.add(item.id);}if(structuralIssues.length){console.error("Ingestion validation failed:",structuralIssues.slice(0,20));process.exit(1);}
 fs.writeFileSync(outputPath,JSON.stringify([...merged.values()],null,2)+"\n");
 console.log(`Saved ${merged.size} normalized titles from ${all.length} source records to ${outputPath}. Mode: ${process.env.INGEST_REPLACE === "1" ? "replace" : "incremental merge"}. Set INGEST_REPLACE=1 to replace the snapshot.`);
