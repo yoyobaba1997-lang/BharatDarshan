@@ -159,6 +159,12 @@
         ],
         "additionalProperties": false
       }
+    },
+    "genreIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
     }
   },
   "additionalProperties": false
