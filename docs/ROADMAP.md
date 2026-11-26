@@ -36,3 +36,18 @@
 - [x] Stage 15 — Generic metadata adapter contract and fixture-based tests (official compatibility adapters pending)
 - [x] Stage 16 — Accessibility improvements; frontend runtime QA pending
 - [ ] Stage 17 — Final release checklist and deployment verification
+
+
+## Stage 17 — Release Checklist
+- [x] Source and documentation updates committed
+- [x] Repository CI workflow configured for push/PR
+- [x] PWA shell and Docker deployment artifacts added
+- [x] Generic metadata export adapter added
+- [ ] Latest CI run verified green
+- [ ] TMDB ingestion run with owner-provided credential
+- [ ] Real ingested catalogue reviewed for quality and source attribution
+- [ ] Deployment URL configured and live health check verified
+- [ ] Browser/mobile/Fire TV runtime QA completed
+- [ ] Provider availability coverage imported from authorized sources
+
+**Release status:** Source implementation is in place; production release remains blocked on external credentials, live deployment, CI verification, and runtime QA.
