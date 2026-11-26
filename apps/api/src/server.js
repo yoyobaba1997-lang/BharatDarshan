@@ -12,7 +12,7 @@ const catalogue = JSON.parse(fs.readFileSync(activePath, "utf8")).map(normalizeT
 const PORT = Number(process.env.PORT || 3000);
 
 function send(res, status, body) {
-  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*" });
+  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*", "x-content-type-options":"nosniff", "cache-control":"public, max-age=60" });
   res.end(JSON.stringify(body, null, 2));
 }
 
