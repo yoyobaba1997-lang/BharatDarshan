@@ -67,3 +67,12 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Quality report available from API route `/quality`.
 - Run local audit with `npm run audit --workspace @bharatdarshan/api`.
 - Completeness percentage is a simple metadata-field metric, not a quality judgement about the content itself.
+
+
+## Stage 10 — Catalogue Insights Dashboard
+- New Insights navigation section with catalogue summary metrics.
+- Type distribution and top-language charts (metadata-derived).
+- Poster coverage and catalogue completeness score cards.
+- Missing metadata and possible duplicate review list.
+- API stats endpoint: `GET /stats` returns total, Indian title count, type counts, language counts and audit report.
+- Dashboard values are derived from the loaded catalogue snapshot; they are not claims of complete provider coverage.
