@@ -31,6 +31,11 @@ Catalogue coverage targets Netflix, Prime Video, JioHotstar, Sony LIV, ZEE5, Ama
 
 A responsive web interface is available in `apps/web` with a catalogue-driven featured hero, search, type/language/genre/year/region filters, sorting, expandable shelves, and TV remote-friendly navigation. Discovery shelves include Indian Cinema, Regional Gems, Anime, Hindi-Dubbed, Hindi Audio, World Stories, Critically Acclaimed, Family & Feel-Good, Documentaries & Reality, Timeless Classics, and Korean & Asian Stories. Start it with `npm run start:web` (port 4173). Start the API separately with `npm run start:api` (port 3000). If the API is unavailable, the UI shows clearly labeled demo data.
 
+
+## Language-first browsing
+
+The web discovery interface includes an Indian-language browser with native-script display, searchable language names/scripts, metadata-record counts, and dedicated shelves for Hindi, Tamil, Telugu, Malayalam, Kannada, Bengali, Marathi, Odia, Punjabi, and Gujarati. Counts are based on the currently ingested metadata and are not claims of catalogue completeness or provider availability.
+
 ## API starter
 
 A dependency-free Node API starter is available in `apps/api`. Initial routes: `/health`, `/languages`, `/categories`, and `/catalog` with query/filter/pagination parameters. Sample data is fixture-only and not a live provider catalogue.
