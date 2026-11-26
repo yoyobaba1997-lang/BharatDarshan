@@ -12,9 +12,7 @@ export async function tmdbRequest(endpoint, params = {}) {
   const token = getToken();
   const headers = token.startsWith("eyJ") ? { Authorization: "Bearer " + token } : {};
   if (!headers.Authorization) url.searchParams.set("api_key", token);
-  const response = await fetch(url, { headers });
-  if (!response.ok) throw new Error(`TMDB request failed: ${response.status} ${response.statusText}`);
-  return response.json();
+  let response;for(let attempt=0;attempt<4;attempt++){response=await fetch(url,{headers});if(response.ok)return response.json();const retryable=response.status===429||response.status>=500;if(!retryable||attempt===3)throw new Error(`TMDB request failed: ${response.status} ${response.statusText}`);const retryAfter=Number(response.headers.get("retry-after")||0);const delay=Math.max(retryAfter*1000,250*Math(2**attempt));await new Promise(resolve=>setTimeout(resolve,Math.min(delay,8000)));}throw new Error("TMDB request failed after retries");
 }
 
 const genreCache = new Map();
