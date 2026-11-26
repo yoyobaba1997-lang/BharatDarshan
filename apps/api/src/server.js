@@ -2,7 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatforms, normalizeTitle } from "../../../packages/catalog/src/catalog.js";
+import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatforms, normalizeTitle, buildCatalogueShelves } from "../../../packages/catalog/src/catalog.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const samplePath = path.resolve(here, "../../../packages/catalog/src/sample-catalog.json");
@@ -30,6 +30,7 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
   if (url.pathname === "/categories") return send(res, 200, catalogueCategories);
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
+  if (url.pathname === "/shelves") return send(res, 200, Object.fromEntries(Object.entries(buildCatalogueShelves(catalogue)).map(([name, items]) => [name, items.length])));
   if (url.pathname === "/catalog") {
     const query = url.searchParams.get("q") ?? "";
     const filters = {
