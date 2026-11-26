@@ -1,8 +1,10 @@
 import languages from "./languages.json" with { type: "json" };
 import categories from "./categories.json" with { type: "json" };
+import platforms from "./platforms.json" with { type: "json" };
 
 export const languageRegistry = languages;
 export const catalogueCategories = categories;
+export const streamingPlatforms = platforms;
 
 export function getLanguage(code) {
   return languageRegistry.find(language => language.code.toLowerCase() === String(code).toLowerCase()) ?? null;
