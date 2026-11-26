@@ -1,0 +1,5 @@
+const base=String(process.env.WEB_URL||"http://localhost:4173").replace(/\/$/,"");
+const checks=[["/", "text/html",["BharatDarshan","detail-modal","watchlist"]],["/styles.css","text/css",["provider-details","dashboard"]],["/app.js","javascript",["function init","catalogueMeta","watchlist"]],["/manifest.webmanifest","application/manifest",["BharatDarshan"]],["/sw.js","javascript",["serviceWorker"]]];
+let failed=0;
+for(const [route,type,markers] of checks){try{const response=await fetch(base+route);if(!response.ok)throw new Error("HTTP "+response.status);const contentType=response.headers.get("content-type")||"";if(!contentType.includes(type))throw new Error("Unexpected content-type "+contentType);const body=await response.text();for(const marker of markers)if(!body.includes(marker))throw new Error("Missing expected marker "+marker);console.log("PASS",route);}catch(error){failed++;console.error("FAIL",route,error.message);}}
+if(failed)process.exitCode=1;else console.log("Web smoke checks passed against "+base);
