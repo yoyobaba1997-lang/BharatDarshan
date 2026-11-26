@@ -109,3 +109,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Accessible labels for primary navigation, search, filters, and language search.
 - Detail modal keyboard focus handling, focus restoration, and Tab trap.
 - Adapter syntax checks included in workspace CI.
+
+
+## Stage 18 — Personal My List
+- Save and remove titles from the detail modal.
+- Watchlist persists in browser-local storage on the device.
+- My List shelf and saved count update immediately.
+- No account sync or server-side personal data is implemented; list remains local to that browser/device.
