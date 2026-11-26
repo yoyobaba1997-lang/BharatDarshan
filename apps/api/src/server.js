@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatforms, normalizeTitle, buildCatalogueShelves, auditCatalogue } from "../../../packages/catalog/src/catalog.js";
+import { toGenericCatalogue } from "../../../packages/adapters/src/generic.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const samplePath = path.resolve(here, "../../../packages/catalog/src/sample-catalog.json");
@@ -32,6 +33,7 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
   if (url.pathname === "/shelves") return send(res, 200, Object.fromEntries(Object.entries(buildCatalogueShelves(catalogue)).map(([name, items]) => [name, items.length])));
   if (url.pathname === "/quality") return send(res, 200, auditCatalogue(catalogue));
+  if (url.pathname === "/export") return send(res, 200, toGenericCatalogue(catalogue));
   if (url.pathname === "/stats") {
     const typeCounts = Object.fromEntries(["movie","series","anime","episode"].map(type => [type, catalogue.filter(item => item.type === type || (type === "anime" && item.tags?.includes("anime"))).length]));
     const languageCounts = {};
@@ -53,7 +55,7 @@ const server = http.createServer((req, res) => {
     const offset = Math.max(0, Number(url.searchParams.get("offset") || 0));
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
-  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality", "/stats"] });
+  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality", "/stats", "/export"] });
 });
 
 server.listen(PORT, "0.0.0.0", () => {
