@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalizeTmdbResult } from "./providers/tmdb.js";
+import { normalizeTmdbResult } from "./tmdb.js";
 
 test("TMDB movie result is normalized with stable source ID", () => {
   const movie=normalizeTmdbResult({id:123,title:"Example",original_title:"Example Original",overview:"Plot",release_date:"2025-05-01",original_language:"hi",genre_ids:[18],poster_path:"/poster.jpg",backdrop_path:"/back.jpg",vote_average:8.1},"movie",new Map([[18,"Drama"]]));
