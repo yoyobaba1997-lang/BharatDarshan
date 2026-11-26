@@ -152,3 +152,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - API search and pagination inputs are validated and bounded.
 - API integration test exercises health, catalogue pagination, stats, quality, export, and invalid parameters.
 - CORS remains configurable via `ALLOWED_ORIGIN`; default is open for public read-only API usage.
+
+
+## Stage 25 — Streaming Platform Discovery
+- Platform registry populates the platform filter dynamically.
+- Catalogue core and API support platform filtering.
+- Filtering uses normalized platform metadata or region-aware provider availability records.
+- Platform filter works alongside language, genre, year, region, type, and search.
