@@ -15,6 +15,10 @@ BharatDarshan is a multilingual entertainment discovery catalogue and standards-
 ## Planned shelves
 Trending Today · Popular Movies · Popular Series · Latest Releases · Recently Added · Continue Watching (client-side) · Top Rated · Indian Cinema · Regional Cinema · Anime Trending · Anime Films · Anime Series · Hindi-Dubbed Anime · Korean Drama · International Cinema · Classics · Genre Collections
 
+## Metadata ingestion
+
+The starter importer uses TMDB metadata. Setup and run instructions are in [docs/INGESTION.md](docs/INGESTION.md). Configure credentials through environment variables; never commit API keys. The importer writes a normalized catalogue snapshot, and the API prefers it when present.
+
 ## OTT platform coverage
 
 Catalogue coverage targets Netflix, Prime Video, JioHotstar, Sony LIV, ZEE5, Amazon MX Player, aha, hoichoi, Sun NXT, ManoramaMAX, Chaupal, ShemarooMe, Eros Now, Lionsgate Play, Planet Marathi OTT, KLiKK, Simply South, Viki, iQIYI, Crunchyroll, Apple TV and more. This is a platform coverage target, not a claim that all catalogues are currently indexed.
