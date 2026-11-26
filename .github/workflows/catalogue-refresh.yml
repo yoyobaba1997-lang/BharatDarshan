@@ -1,0 +1,59 @@
+name: BharatDarshan Catalogue Refresh
+
+on:
+  schedule:
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
+    inputs:
+      provider_enrichment:
+        description: "Include bounded TMDB watch-provider enrichment"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      provider_limit:
+        description: "Maximum titles for provider enrichment (1–500)"
+        required: false
+        default: "100"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalogue-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run check
+      - run: npm test
+      - name: Ingest metadata snapshot
+        env:
+          TMDB_READ_ACCESS_TOKEN: ${{ secrets.TMDB_READ_ACCESS_TOKEN }}
+          INGEST_PAGES: "2"
+          INGEST_TYPES: "movie,tv"
+          INGEST_MODES: "trending,popular,top_rated,indian_languages"
+          INGEST_LANGUAGES: "hi,ta,te,ml,kn,bn,mr,gu,pa,or,as,ur"
+          INGEST_PROVIDER_AVAILABILITY: ${{ github.event.inputs.provider_enrichment || 'false' == 'true' && '1' || '0' }}
+          INGEST_PROVIDER_LIMIT: ${{ github.event.inputs.provider_limit || '100' }}
+          INGEST_PROVIDER_REGIONS: "IN,US,GB"
+          INGEST_REPLACE: "1"
+        run: npm run ingest
+      - name: Audit generated catalogue
+        run: npm run audit
+      - name: Upload catalogue snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: bharatdarshan-catalogue-${{ github.run_id }}
+          path: packages/catalog/src/ingested-catalog.json
+          retention-days: 30
