@@ -125,7 +125,7 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 
 ## Stage 20 — Provider Availability Metadata Integration
 - Optional TMDB Watch Provider lookup for region-specific availability metadata.
-- Provider categories include subscription, free, rent, and buy.
+- Provider categories include subscription, free, ad-supported, rent, and buy.
 - Records include region, provider ID/name, TMDB source, TMDB watch-page URL, and checked timestamp.
 - Enrichment is opt-in and bounded: `INGEST_PROVIDER_AVAILABILITY=1`, `INGEST_PROVIDER_LIMIT`, and `INGEST_PROVIDER_REGIONS`.
 - Provider coverage metrics are exposed in `/stats` and the dashboard.
