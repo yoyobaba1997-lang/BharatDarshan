@@ -28,3 +28,8 @@ Set `BHARATDARSHAN_API` to the browser-reachable API URL when deploying to a rem
 - Provider availability is not currently a complete verified dataset.
 - Service-worker offline mode caches the app shell; API data and posters are not guaranteed offline.
 - Live runtime and deployment checks must be performed after deployment.
+
+
+## Scheduled catalogue refresh
+
+`.github/workflows/catalogue-refresh.yml` runs weekly and can also be manually dispatched. It requires the repository secret `TMDB_READ_ACCESS_TOKEN`. The workflow creates and audits a fresh snapshot, then uploads it as a 30-day artifact. It does not automatically commit catalogue data or redeploy the live API. Manual runs can optionally enable bounded provider enrichment.
