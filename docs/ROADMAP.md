@@ -75,3 +75,5 @@
 - [x] Stage 24 — API input validation, security headers, and integration test coverage
 
 - [x] Stage 25 — Streaming platform discovery filters
+
+- [x] Stage 26 — Provider availability details, region/category/source transparency
