@@ -19,7 +19,7 @@ for (const type of types) {
       for (const language of languages) {
         for (let page = 1; page <= pages; page++) {
           const result = await discoverByLanguage(kind, language, page, { region: "IN" });
-          all.push(...result.results.map(item => ({ ...item, tags:[...(item.tags||[]),"indian-language-discovery",`language-${language}`], collections:[...(item.collections||[]),`Language: ${language}`], genres:(item.genreIds??[]).map(id=>genreMap.get(id)).filter(Boolean) })));
+          all.push(...result.results.map(item => ({ ...item, isIndian:true, tags:[...(item.tags||[]),"indian-content","indian-language-discovery",`language-${language}`], collections:[...(item.collections||[]),`Language: ${language}`], genres:(item.genreIds??[]).map(id=>genreMap.get(id)).filter(Boolean) })));
         }
       }
       continue;
