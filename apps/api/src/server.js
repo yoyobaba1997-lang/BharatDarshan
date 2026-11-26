@@ -19,7 +19,7 @@ function send(res, status, body) {
 const server = http.createServer((req, res) => {
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
-      "access-control-allow-origin": "*",
+      "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*",
       "access-control-allow-methods": "GET,OPTIONS",
       "access-control-allow-headers": "Content-Type"
     });
