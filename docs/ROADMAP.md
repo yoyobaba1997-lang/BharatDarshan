@@ -99,3 +99,5 @@
 - [x] Stage 33 — Manual HTTPS release smoke-check workflow
 
 - [x] Stage 34 — Catalogue provenance/freshness metadata endpoint
+
+- [x] Stage 35 — Dashboard catalogue source and snapshot freshness indicators
