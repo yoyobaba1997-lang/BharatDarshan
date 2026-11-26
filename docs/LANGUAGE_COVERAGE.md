@@ -1,7 +1,7 @@
-# Language Coverage Strategy
+# Language Coverage
 
-Language coverage is registry-based and extensible. Each entry may include ISO 639 code(s), native name, English name, script, regional variants, aliases, and metadata-source identifiers.
+The language registry is an extensible starter list. It includes scheduled languages, commonly catalogued Indian regional languages, and additional community/language entries. This is **not a claim that the list is exhaustive or that every entry has a single standardized spelling/script**.
 
-Starter coverage (not exhaustive): Assamese, Bengali, Bodo, Dogri, Gujarati, Hindi, Kannada, Kashmiri, Konkani, Maithili, Malayalam, Manipuri/Meitei, Marathi, Nepali, Odia, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Telugu, Urdu, plus additional Indian languages and regional variants.
+Each registry entry has a code, English name, native name, script label, and aliases field. Further expansion and validation should use authoritative language-code references and community review. The catalogue model supports multiple scripts and aliases where needed.
 
-Coverage should be expanded using authoritative language identifiers and validated aliases. Do not equate a language with a single region or script where variants exist.
+Language filtering checks title language, audio, subtitle, and dub metadata. International language codes are accepted by the validation layer as additional supported codes.
