@@ -15,6 +15,10 @@ BharatDarshan is a multilingual entertainment discovery catalogue and standards-
 ## Planned shelves
 Trending Today · Popular Movies · Popular Series · Latest Releases · Recently Added · Continue Watching (client-side) · Top Rated · Indian Cinema · Regional Cinema · Anime Trending · Anime Films · Anime Series · Hindi-Dubbed Anime · Korean Drama · International Cinema · Classics · Genre Collections
 
+## API starter
+
+A dependency-free Node API starter is available in `apps/api`. Initial routes: `/health`, `/languages`, `/categories`, and `/catalog` with query/filter/pagination parameters. Sample data is fixture-only and not a live provider catalogue.
+
 ## Project structure
 - `packages/catalog`: normalized metadata, language registry, categories, filters
 - `packages/adapters`: client-specific compatibility adapters
