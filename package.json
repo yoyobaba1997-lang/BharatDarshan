@@ -1,0 +1,11 @@
+{
+  "name": "bharatdarshan",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Multilingual Indian entertainment discovery catalogue and cross-platform add-on",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "check": "npm run check --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}
