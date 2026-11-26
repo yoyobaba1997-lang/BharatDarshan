@@ -31,6 +31,7 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
   if (url.pathname === "/categories") return send(res, 200, catalogueCategories);
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
+  if (url.pathname === "/catalogue-meta") {const snapshotExists=activePath===ingestedPath;const snapshotStat=snapshotExists?fs.statSync(activePath):null;const providerRecords=catalogue.flatMap(item=>item.providerAvailability||[]);const providerTitles=catalogue.filter(item=>(item.providerAvailability||[]).length).length;const checkedDates=providerRecords.map(record=>record.checkedAt).filter(Boolean).sort();return send(res,200,{source:snapshotExists?"ingested-snapshot":"demo-sample",sourceFile:path.basename(activePath),titleCount:catalogue.length,snapshotModifiedAt:snapshotStat?.mtime.toISOString()||null,providerMetadataTitles:providerTitles,providerRecordCount:providerRecords.length,providerRegions:[...new Set(providerRecords.map(record=>record.region).filter(Boolean))],latestProviderCheckedAt:checkedDates.at(-1)||null,apiStartedAt:new Date().toISOString()});}
   if (url.pathname === "/shelves") return send(res, 200, Object.fromEntries(Object.entries(buildCatalogueShelves(catalogue)).map(([name, items]) => [name, items.length])));
   if (url.pathname === "/quality") return send(res, 200, auditCatalogue(catalogue));
   if (url.pathname === "/export") return send(res, 200, toGenericCatalogue(catalogue));
