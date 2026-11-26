@@ -76,3 +76,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Missing metadata and possible duplicate review list.
 - API stats endpoint: `GET /stats` returns total, Indian title count, type counts, language counts and audit report.
 - Dashboard values are derived from the loaded catalogue snapshot; they are not claims of complete provider coverage.
+
+
+## Stage 12 — Installable PWA and Offline Shell
+- Web app manifest, BharatDarshan icon, and install prompt where supported.
+- Service worker caches the app shell for offline launch.
+- Offline catalogue falls back to the labelled demo catalogue when the API is unavailable.
+- Offline caching is limited to same-origin app shell assets; API metadata and poster images are not guaranteed offline.
