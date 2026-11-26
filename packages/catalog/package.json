@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test",
-    "check": "node --test"
+    "test": "node --test src/*.test.js",
+    "check": "node --test src/*.test.js"
   }
 }
