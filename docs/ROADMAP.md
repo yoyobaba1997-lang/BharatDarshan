@@ -81,3 +81,5 @@
 - [x] Stage 27 — Recently Viewed history and clear-history control
 
 - [x] Stage 28 — Web server runtime smoke tests for PWA assets, API config, and security headers
+
+- [x] Stage 26 — Provider availability details in title modal, source links, region/category/timestamp and freshness disclaimer
