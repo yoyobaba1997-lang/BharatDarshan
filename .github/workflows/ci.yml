@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -16,3 +20,7 @@ jobs:
       - run: npm install
       - run: npm test
       - run: npm run check
+      - name: Build API container
+        run: docker build -f apps/api/Dockerfile -t bharatdarshan-api:ci .
+      - name: Build web container
+        run: docker build -f apps/web/Dockerfile -t bharatdarshan-web:ci .
