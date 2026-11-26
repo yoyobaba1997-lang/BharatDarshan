@@ -13,7 +13,7 @@ const catalogue = JSON.parse(fs.readFileSync(activePath, "utf8")).map(normalizeT
 const PORT = Number(process.env.PORT || 3000);
 
 function send(res, status, body) {
-  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*", "x-content-type-options":"nosniff", "cache-control":"public, max-age=60" });
+  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*", "x-content-type-options":"nosniff", "x-frame-options":"DENY", "referrer-policy":"no-referrer", "permissions-policy":"camera=(), microphone=(), geolocation=()", "vary":"Origin", "cache-control":"public, max-age=60" });
   res.end(JSON.stringify(body, null, 2));
 }
 
@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
     const providerTitles=catalogue.filter(item=>Array.isArray(item.providerAvailability)&&item.providerAvailability.length).length;const providerNames=[...new Set(catalogue.flatMap(item=>(item.providerAvailability||[]).map(record=>record.platform)))];const providerRegions=[...new Set(catalogue.flatMap(item=>(item.providerAvailability||[]).map(record=>record.region)))];return send(res, 200, { total: catalogue.length, indian: indianCount, typeCounts, languageCounts, providerMetadataTitles:providerTitles, providers:providerNames, providerRegions, quality: auditCatalogue(catalogue) });
   }
   if (url.pathname === "/catalog") {
-    const query = url.searchParams.get("q") ?? "";
+    const query = url.searchParams.get("q") ?? "";if(query.length>300)return send(res,400,{error:"Search query must be 300 characters or fewer"});
     const filters = {
       type: url.searchParams.get("type") || undefined,
       language: url.searchParams.get("language") || undefined,
@@ -51,8 +51,7 @@ const server = http.createServer((req, res) => {
       year: url.searchParams.get("year") || undefined
     };
     const results = searchCatalogue(catalogue, query, filters);
-    const limit = Math.max(1, Math.min(100, Number(url.searchParams.get("limit") || 50)));
-    const offset = Math.max(0, Number(url.searchParams.get("offset") || 0));
+    const requestedLimit=Number(url.searchParams.get("limit")||50);const requestedOffset=Number(url.searchParams.get("offset")||0);if(!Number.isInteger(requestedLimit)||requestedLimit<1||requestedLimit>100||!Number.isInteger(requestedOffset)||requestedOffset<0)return send(res,400,{error:"limit must be 1–100 and offset must be a non-negative integer"});const limit=requestedLimit;const offset=requestedOffset;
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
   return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality", "/stats", "/export"] });
