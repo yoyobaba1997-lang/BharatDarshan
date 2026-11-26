@@ -27,6 +27,8 @@ export function normalizeTitle(item) {
     subtitleLanguages: unique(item.subtitleLanguages),
     dubLanguages: unique(item.dubLanguages),
     regions: unique(item.regions),
+    streamingPlatforms: unique(item.streamingPlatforms),
+    providerAvailability: Array.isArray(item.providerAvailability) ? item.providerAvailability : [],
     tags: unique(item.tags),
     collections: unique(item.collections),
     keywords: unique(item.keywords)
