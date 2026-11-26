@@ -219,3 +219,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Docker Compose host ports are configurable.
 - Deployment documentation includes config validation, startup, and smoke-test commands.
 - Production public API URL and exact allowed origin still need deployment-specific values.
+
+
+## Stage 33 — Manual Deployment Verification Workflow
+- GitHub Actions workflow accepts a public HTTPS API URL and runs the smoke checks against it.
+- It is manual-only; no deployment credentials are required.
+- This workflow has not been run against a live deployment yet.
