@@ -168,6 +168,36 @@
       "items": {
         "type": "integer"
       }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "collections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "originalLanguage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "isAnime": {
+      "type": "boolean"
+    },
+    "isIndian": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false
