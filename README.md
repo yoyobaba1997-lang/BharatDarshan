@@ -29,7 +29,7 @@ Catalogue coverage targets Netflix, Prime Video, JioHotstar, Sony LIV, ZEE5, Ama
 
 ## Web discovery interface
 
-A responsive web interface is now available in `apps/web` with hero discovery, search, type filters, language selector, and shelves for Indian Cinema, Regional Gems, Anime, and World Stories. Start it with `npm run start:web` (port 4173). Start the API separately with `npm run start:api` (port 3000). If the API is unavailable, the UI shows clearly labeled demo data.
+A responsive web interface is available in `apps/web` with a catalogue-driven featured hero, search, type/language/genre/year/region filters, sorting, expandable shelves, and TV remote-friendly navigation. Discovery shelves include Indian Cinema, Regional Gems, Anime, Hindi-Dubbed, Hindi Audio, World Stories, Critically Acclaimed, Family & Feel-Good, Documentaries & Reality, Timeless Classics, and Korean & Asian Stories. Start it with `npm run start:web` (port 4173). Start the API separately with `npm run start:api` (port 3000). If the API is unavailable, the UI shows clearly labeled demo data.
 
 ## API starter
 
@@ -49,4 +49,4 @@ Language coverage is registry-driven, not limited to a hard-coded list. Starter 
 BharatDarshan is metadata and discovery-first. Stream integrations must be authorized and comply with providers' terms and applicable law. No piracy link lists or circumvention features.
 
 ## Status
-🚧 Early foundation. Compatibility adapters, providers, UI, and tests will be built and verified incrementally.
+🚧 Early foundation. Catalogue ingestion still requires configured TMDB credentials and runtime verification. Streaming-provider availability is not yet populated. UI source changes are committed incrementally; browser, Android, and Fire TV runtime testing is pending.
