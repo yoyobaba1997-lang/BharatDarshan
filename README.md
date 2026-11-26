@@ -225,3 +225,10 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - GitHub Actions workflow accepts a public HTTPS API URL and runs the smoke checks against it.
 - It is manual-only; no deployment credentials are required.
 - This workflow has not been run against a live deployment yet.
+
+
+## Stage 34 — Catalogue Provenance & Freshness Endpoint
+- `/catalogue-meta` identifies demo sample vs ingested snapshot.
+- Reports title count, snapshot file modification time, provider metadata coverage/regions, latest provider checked timestamp, and API startup time.
+- Added endpoint to integration tests and deployment smoke checks.
+- Snapshot timestamps are filesystem metadata; they are not a guarantee of provider availability freshness.
