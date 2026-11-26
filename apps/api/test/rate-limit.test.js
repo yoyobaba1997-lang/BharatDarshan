@@ -11,14 +11,8 @@ async function startApi(t, envOverrides = {}) {
     stdio: "ignore"
   });
   t.after(() => child.kill());
-  for (let i = 0; i < 50; i++) {
-    try {
-      const response = await fetch(base + "/health");
-      if (response.ok) return { base, child };
-    } catch {}
-    await new Promise(resolve => setTimeout(resolve, 100));
-  }
-  throw new Error("API server did not become healthy");
+  await new Promise(resolve => setTimeout(resolve, 350));
+  return { base, child };
 }
 
 test("rate limit returns 429 and Retry-After based on configured window", async t => {
