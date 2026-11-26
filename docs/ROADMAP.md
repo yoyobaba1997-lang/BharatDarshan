@@ -3,59 +3,68 @@
 ## Foundation
 - [x] Repository and project scope
 - [x] Starter catalogue categories
-- [x] Language registry (growing starter list)
+- [x] Language registry (expanding)
 - [x] Metadata schema and catalogue core
 - [x] Search/filter functions and validation
 - [x] Initial API endpoints
+- [x] Generic catalogue API
 
 ## Catalogue & UI
-- [x] Metadata provider interface starter and source attribution documentation
-- [x] Search filters (type, language, genre, region, year) in core
-- [ ] Responsive streaming-style web UI
-- [x] Anime classification and audio/dub/subtitle fields in model
+- [x] Streaming-style responsive web UI
+- [x] Search, type, language, genre, region, year and sort filters
+- [x] Anime classification and audio/dub/subtitle metadata
+- [x] Dynamic hero and curated shelves
+- [x] Indian-language discovery browser and dynamic language shelves
+- [x] Catalogue insights dashboard and quality audit
+- [x] PWA installability and offline app shell
+- [x] Local My List/watchlist and JSON import/export
+- [x] Accessibility labels and modal keyboard focus handling
 
-## Metadata ingestion\n- [x] TMDB trending metadata importer starter\n- [x] Normalized source IDs, dates, ratings, images and genre mapping\n- [ ] Provider availability ingestion (terms/attribution review required)\n- [ ] Scheduled refresh and incremental update pipeline\n\n## Integrations
-- [ ] Adapter contract and fixture tests
-- [ ] Nuvio adapter (verify current interface first)
-- [ ] Stremio-compatible adapter (verify official spec)
-- [x] Generic catalogue API starter
+## Metadata ingestion
+- [x] TMDB trending/popular/top-rated importer
+- [x] Normalized source IDs, dates, ratings, images and genre mapping
+- [x] Incremental merge and snapshot validation
+- [x] Retry/backoff for rate limits and transient errors
+- [x] Optional region-aware watch-provider metadata enrichment
+- [ ] Run ingestion with owner-provided credential and review the resulting snapshot
+- [ ] Scheduled refresh automation (requires hosting/secret configuration)
 
-## Quality
-- [x] Catalogue unit tests added
-- [x] Unit tests added for catalogue and provider normalization\n- [ ] Run tests in CI and verify results
-- [ ] Source/legal review
-- [ ] Deployment configuration
+## Integrations
+- [x] Generic metadata adapter contract and fixture tests
+- [x] Generic JSON metadata export endpoint
+- [ ] Nuvio adapter (verify current interface/version first)
+- [ ] Stremio catalog metadata adapter (official spec review required; stream endpoints excluded)
 
+## Deployment & quality
+- [x] Dockerfiles and Docker Compose
+- [x] API and web health checks
+- [x] GitHub Actions CI workflow (latest run still requires verification)
+- [x] Release and deployment checklist documentation
+- [ ] CI latest run verified green
+- [ ] Source/legal/attribution review
+- [ ] Production deployment and live health checks
+- [ ] Browser/mobile/Fire TV runtime QA
+- [ ] Provider metadata enrichment run and coverage review
 
 ## Stage Progress
-- [x] Stage 10 — Catalogue insights dashboard and quality review
-- [x] Stage 11 — Corrected language-code registry and dynamic Indian-language discovery shelves
-- [x] Stage 12 — PWA installability and offline shell
-- [x] Stage 13 — Ingestion pipeline safeguards, incremental refresh, and metadata source traceability
-- [x] Stage 14 — Deployment readiness, environment validation, and operational health checks
-- [x] Stage 15 — Generic metadata adapter contract and fixture-based tests (official compatibility adapters pending)
-- [x] Stage 16 — Accessibility improvements; frontend runtime QA pending
-- [ ] Stage 17 — Final release checklist and deployment verification
-
-
-## Stage 17 — Release Checklist
-- [x] Source and documentation updates committed
-- [x] Repository CI workflow configured for push/PR
-- [x] PWA shell and Docker deployment artifacts added
-- [x] Generic metadata export adapter added
-- [ ] Latest CI run verified green
-- [ ] TMDB ingestion run with owner-provided credential
-- [ ] Real ingested catalogue reviewed for quality and source attribution
-- [ ] Deployment URL configured and live health check verified
-- [ ] Browser/mobile/Fire TV runtime QA completed
-- [ ] Provider availability coverage imported from authorized sources
-
-**Release status:** Source implementation is in place; production release remains blocked on external credentials, live deployment, CI verification, and runtime QA.
-
+- [x] Stage 10 — Catalogue insights dashboard
+- [x] Stage 11 — Language registry corrections and dynamic Indian-language discovery
+- [x] Stage 12 — PWA and offline app shell
+- [x] Stage 13 — Incremental ingestion safeguards and provenance
+- [x] Stage 14 — Deployment configuration and health checks
+- [x] Stage 15 — Generic metadata adapter
+- [x] Stage 16 — Accessibility improvements
+- [x] Stage 17 — Release checklist and deployment guide created
 - [x] Stage 18 — Personal local watchlist/My List
-- [x] Stage 19 — Watchlist portability via validated JSON import/export (cloud sync remains future work)
-- [x] Stage 20 — Optional TMDB provider-availability metadata integration with region/source/time provenance (real enrichment run pending credentials)
-- [ ] Stage 21 — Live browser/device QA and production release verification
+- [x] Stage 19 — Watchlist JSON import/export portability
+- [x] Stage 20 — Optional TMDB provider-availability metadata integration
 
-- [ ] Stage 22 — Secure account system/cloud watchlist sync (requires auth/security design and hosting decision)
-- [ ] Stage 23 — Final live provider enrichment run and review
+## Release status
+**Source implementation:** substantially complete through Stage 20.
+
+**Production release remains pending:** CI verification, TMDB credentials and ingestion, provider enrichment run, source/legal review, deployment configuration, and browser/mobile/Fire TV runtime QA.
+
+## Future stages
+- [ ] Stage 21 — Live browser/device QA and release verification
+- [ ] Stage 22 — Secure account system and cloud watchlist sync (requires authentication/security design and hosting decision)
+- [ ] Stage 23 — Final provider enrichment run and data coverage review
