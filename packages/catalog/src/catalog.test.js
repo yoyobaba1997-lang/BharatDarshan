@@ -14,6 +14,8 @@ test("language registry includes Indian languages and is searchable by code", ()
   assert.equal(getLanguage("or").name, "Odia");
 });
 
+test("language registry uses correct Bodo and Tibetan ISO codes", () => { assert.equal(getLanguage("brx").name,"Bodo"); assert.equal(getLanguage("bo").name,"Tibetan"); assert.equal(getLanguage("gon").name,"Gondi"); });
+
 test("normalization trims and de-duplicates catalogue metadata", () => {
   const item = normalizeTitle({id:"x",title:"  Test  ",genres:["Drama","Drama"],languages:["hi","hi"]});
   assert.equal(item.title,"Test");
