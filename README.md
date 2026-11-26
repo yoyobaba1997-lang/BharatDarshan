@@ -19,6 +19,10 @@ Trending Today · Popular Movies · Popular Series · Latest Releases · Recentl
 
 The starter importer uses TMDB metadata. Setup and run instructions are in [docs/INGESTION.md](docs/INGESTION.md). Configure credentials through environment variables; never commit API keys. The importer writes a normalized catalogue snapshot, and the API prefers it when present.
 
+## Catalogue classification
+
+Metadata-based classification provides Indian-content, anime, animation, Hindi-audio, and Hindi-dub tags. Hindi dubbing is only labeled when the catalogue explicitly contains Hindi dub/audio metadata; it is never guessed. The API exposes `/shelves` for counts by supported classification shelf.
+
 ## OTT platform coverage
 
 Catalogue coverage targets Netflix, Prime Video, JioHotstar, Sony LIV, ZEE5, Amazon MX Player, aha, hoichoi, Sun NXT, ManoramaMAX, Chaupal, ShemarooMe, Eros Now, Lionsgate Play, Planet Marathi OTT, KLiKK, Simply South, Viki, iQIYI, Crunchyroll, Apple TV and more. This is a platform coverage target, not a claim that all catalogues are currently indexed.
