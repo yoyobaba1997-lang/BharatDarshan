@@ -77,3 +77,5 @@
 - [x] Stage 25 — Streaming platform discovery filters
 
 - [x] Stage 26 — Provider availability details, region/category/source transparency
+
+- [x] Stage 27 — Recently Viewed history and clear-history control
