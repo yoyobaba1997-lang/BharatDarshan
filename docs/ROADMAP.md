@@ -87,3 +87,5 @@
 - [x] Stage 27 — Bounded local catalogue cache with offline fallback
 
 - [x] Stage 28 — Validate catalogue image and provider source URLs before rendering
+
+- [x] Stage 29 — Expanded API integration coverage for security, filters, exports and validation
