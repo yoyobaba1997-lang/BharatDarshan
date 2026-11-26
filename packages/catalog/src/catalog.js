@@ -29,10 +29,7 @@ export function normalizeTitle(item) {
     regions: unique(item.regions),
     tags: unique(item.tags),
     collections: unique(item.collections),
-    keywords: unique(item.keywords),
-    audioLanguages: unique(item.audioLanguages),
-    dubLanguages: unique(item.dubLanguages),
-    subtitleLanguages: unique(item.subtitleLanguages)
+    keywords: unique(item.keywords)
   };
 }
 
