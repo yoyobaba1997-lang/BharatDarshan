@@ -116,3 +116,17 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Watchlist persists in browser-local storage on the device.
 - My List shelf and saved count update immediately.
 - No account sync or server-side personal data is implemented; list remains local to that browser/device.
+
+
+## Stage 19 — Watchlist Portability
+- Export My List to a JSON file and import it on another browser/device.
+- Imported IDs are validated against the catalogue loaded on that device.
+- Personal watchlist remains local; there is no account sync.
+
+## Stage 20 — Provider Availability Metadata Integration
+- Optional TMDB Watch Provider lookup for region-specific availability metadata.
+- Provider categories include subscription, free, rent, and buy.
+- Records include region, provider ID/name, TMDB source, TMDB watch-page URL, and checked timestamp.
+- Enrichment is opt-in and bounded: `INGEST_PROVIDER_AVAILABILITY=1`, `INGEST_PROVIDER_LIMIT`, and `INGEST_PROVIDER_REGIONS`.
+- Provider coverage metrics are exposed in `/stats` and the dashboard.
+- Provider metadata is not a playback link; availability can change and should be refreshed.
