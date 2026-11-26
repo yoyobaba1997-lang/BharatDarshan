@@ -1,0 +1,7 @@
+{
+  "name": "@bharatdarshan/catalog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"check": "echo 'Catalog package scaffold: checks pending'"}
+}
