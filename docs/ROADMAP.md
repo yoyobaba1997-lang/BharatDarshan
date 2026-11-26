@@ -89,3 +89,5 @@
 - [x] Stage 28 — Validate catalogue image and provider source URLs before rendering
 
 - [x] Stage 29 — Expanded API integration coverage for security, filters, exports and validation
+
+- [x] Stage 30 — Consolidated production release checklist (live validation remains pending)
