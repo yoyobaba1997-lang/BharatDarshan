@@ -1,10 +1,12 @@
 import languages from "./languages.json" with { type: "json" };
 import categories from "./categories.json" with { type: "json" };
 import platforms from "./platforms.json" with { type: "json" };
+import { classifyTitle, buildCatalogueShelves } from "./classify.js";
 
 export const languageRegistry = languages;
 export const catalogueCategories = categories;
 export const streamingPlatforms = platforms;
+export { classifyTitle, buildCatalogueShelves };
 
 export function getLanguage(code) {
   return languageRegistry.find(language => language.code.toLowerCase() === String(code).toLowerCase()) ?? null;
@@ -24,7 +26,13 @@ export function normalizeTitle(item) {
     audioLanguages: unique(item.audioLanguages),
     subtitleLanguages: unique(item.subtitleLanguages),
     dubLanguages: unique(item.dubLanguages),
-    regions: unique(item.regions)
+    regions: unique(item.regions),
+    tags: unique(item.tags),
+    collections: unique(item.collections),
+    keywords: unique(item.keywords),
+    audioLanguages: unique(item.audioLanguages),
+    dubLanguages: unique(item.dubLanguages),
+    subtitleLanguages: unique(item.subtitleLanguages)
   };
 }
 
