@@ -95,3 +95,5 @@
 - [x] Stage 31 — Dependency-free API deployment smoke-test script
 
 - [x] Stage 32 — Configurable deployment environment and compose ports
+
+- [x] Stage 33 — Manual HTTPS release smoke-check workflow
