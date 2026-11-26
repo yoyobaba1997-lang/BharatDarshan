@@ -26,7 +26,7 @@ const server = http.createServer((req, res) => {
     return res.end();
   }
   const url = new URL(req.url, "http://localhost");
-  if (url.pathname === "/health") return send(res, 200, { ok: true, name: "BharatDarshan API", version: "0.1.0" });
+  if (url.pathname === "/health") return send(res, 200, { ok: true, name: "BharatDarshan API", version: "0.1.0", catalogueCount: catalogue.length, catalogueSource: path.basename(activePath), checkedAt: new Date().toISOString() });
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
   if (url.pathname === "/categories") return send(res, 200, catalogueCategories);
   if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
