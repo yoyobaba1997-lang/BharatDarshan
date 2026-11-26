@@ -244,3 +244,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Quality audit reports provider record counts, titles with provider metadata, missing checked timestamps, and stale/invalid timestamps (30-day freshness window).
 - Dashboard displays provider metadata audit counts.
 - This freshness metric describes the metadata timestamp, not guaranteed streaming availability.
+
+
+## Stage 37 — Web Deployment Smoke Tests
+- Added dependency-free checks for web HTML, CSS, JavaScript, manifest, and service worker.
+- Manual GitHub Actions release-smoke workflow now accepts both API and web URLs and checks both deployments.
+- Live deployment validation remains pending until the workflow is run with real public URLs.
