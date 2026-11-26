@@ -201,3 +201,8 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Catalogue poster/backdrop URLs are validated before use.
 - External media/source links require HTTPS; same-origin HTTP is allowed for local development.
 - Provider source links are validated before being rendered as clickable links.
+
+
+## Stage 29 — API Integration Test Expansion
+- Tests API security headers, health, catalogue paging, statistics, quality report, export, platform filtering, and invalid pagination/search input.
+- The test suite is part of the repository CI workflow; actual CI result still requires checking the latest run.
