@@ -105,6 +105,11 @@
 - [x] Stage 39 — Configurable per-IP API rate limit and Retry-After response; operational settings documented
 
 ## Next implementation stages
-- [ ] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
-- [ ] Stage 41 — Consolidate roadmap and release-status reporting
+- [x] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
+- [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
 - [ ] Stage 42 — Security/error-handling review and production runtime verification
+
+## Current verification status
+- Latest code changes are pushed to `main`; push-triggered CI is expected to run.
+- CI is **not considered confirmed green** until a workflow run for the latest commit is fetched and reports success.
+- Rate-limit integration tests are committed; local execution is not available in this environment.
