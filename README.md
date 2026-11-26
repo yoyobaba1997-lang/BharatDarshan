@@ -138,3 +138,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Refresh validates and audits the snapshot, then uploads a 30-day artifact.
 - Optional bounded provider enrichment can be enabled on manual runs.
 - Refresh artifacts are not automatically deployed or committed; release/deployment remains a deliberate step.
+
+
+## Stage 23 — Source Attribution & Licensing
+- TMDB API attribution notice added to the application footer.
+- Official TMDB attribution/logo guidance linked.
+- Source policy documents non-commercial attribution and commercial licensing review requirements.
+- The official approved TMDB logo still needs to be integrated before production release.
