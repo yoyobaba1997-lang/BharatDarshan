@@ -2,7 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { searchCatalogue, languageRegistry, catalogueCategories, normalizeTitle } from "../../../packages/catalog/src/catalog.js";
+import { searchCatalogue, languageRegistry, catalogueCategories, streamingPlatforms, normalizeTitle } from "../../../packages/catalog/src/catalog.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const samplePath = path.resolve(here, "../../../packages/catalog/src/sample-catalog.json");
@@ -27,6 +27,7 @@ const server = http.createServer((req, res) => {
   if (url.pathname === "/health") return send(res, 200, { ok: true, name: "BharatDarshan API", version: "0.1.0" });
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
   if (url.pathname === "/categories") return send(res, 200, catalogueCategories);
+  if (url.pathname === "/platforms") return send(res, 200, streamingPlatforms);
   if (url.pathname === "/catalog") {
     const query = url.searchParams.get("q") ?? "";
     const filters = {
@@ -41,7 +42,7 @@ const server = http.createServer((req, res) => {
     const offset = Math.max(0, Number(url.searchParams.get("offset") || 0));
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
-  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/catalog"] });
+  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog"] });
 });
 
 server.listen(PORT, "0.0.0.0", () => {
