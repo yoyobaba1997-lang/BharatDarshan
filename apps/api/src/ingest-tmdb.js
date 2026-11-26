@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchTrending, fetchCatalogueList, discoverByLanguage, fetchGenreMap } from "../../../packages/catalog/src/providers/tmdb.js";
+import { fetchTrending, fetchCatalogueList, discoverByLanguage, fetchGenreMap, fetchWatchProviders } from "../../../packages/catalog/src/providers/tmdb.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.resolve(here, "../../../packages/catalog/src/ingested-catalog.json");
@@ -50,6 +50,7 @@ for (const rawItem of all) {
     dubLanguages:union(previous.dubLanguages,item.dubLanguages),regions:union(previous.regions,item.regions)
   });
 }
+if(process.env.INGEST_PROVIDER_AVAILABILITY==="1"){const regions=(process.env.INGEST_PROVIDER_REGIONS||"IN,US,GB").split(",").map(x=>x.trim().toUpperCase()).filter(Boolean);const limit=Math.max(0,Math.min(500,Number(process.env.INGEST_PROVIDER_LIMIT||100)));const candidates=[...merged.values()].filter(item=>item.sourceIds?.tmdb&&["movie","series"].includes(item.type)).slice(0,limit);console.log(`Enriching watch-provider metadata for ${candidates.length} titles across ${regions.join(",")}`);for(const item of candidates){try{const kind=item.type==="series"?"tv":"movie";const providerRecords=await fetchWatchProviders(kind,item.sourceIds.tmdb,regions);const preserved=(item.providerAvailability||[]).filter(record=>!regions.includes(String(record.region||"").toUpperCase()));item.providerAvailability=[...preserved,...providerRecords];item.streamingPlatforms=[...new Set([...(item.streamingPlatforms||[]),...providerRecords.map(record=>record.platform)])];}catch(error){console.warn(`Provider lookup failed for ${item.id}: ${error.message}`);}await new Promise(resolve=>setTimeout(resolve,150));}}
 const finalItems=[...merged.values()];const structuralIssues=[];const seenIds=new Set();for(const item of finalItems){if(!item.id)structuralIssues.push("Missing id");if(!item.title?.trim())structuralIssues.push(`Missing title for ${item.id||"record"}`);if(!["movie","series","anime","episode"].includes(item.type))structuralIssues.push(`Unsupported type ${item.type} for ${item.id}`);if(seenIds.has(item.id))structuralIssues.push(`Duplicate id ${item.id}`);seenIds.add(item.id);}if(structuralIssues.length){console.error("Ingestion validation failed:",structuralIssues.slice(0,20));process.exit(1);}
 fs.writeFileSync(outputPath,JSON.stringify([...merged.values()],null,2)+"\n");
 console.log(`Saved ${merged.size} normalized titles from ${all.length} source records to ${outputPath}. Mode: ${process.env.INGEST_REPLACE === "1" ? "replace" : "incremental merge"}. Set INGEST_REPLACE=1 to replace the snapshot.`);
