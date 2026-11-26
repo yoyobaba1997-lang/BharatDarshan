@@ -195,3 +195,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - If the API is unavailable, the app prefers the saved catalogue and clearly labels it with its cache refresh timestamp.
 - If no cache exists, it uses the explicitly labeled demonstration catalogue.
 - Browser storage quota may limit cache persistence; cache write failures are handled without blocking app startup.
+
+
+## Stage 28 — Metadata URL Safety
+- Catalogue poster/backdrop URLs are validated before use.
+- External media/source links require HTTPS; same-origin HTTP is allowed for local development.
+- Provider source links are validated before being rendered as clickable links.
