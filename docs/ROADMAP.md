@@ -68,3 +68,6 @@
 - [ ] Stage 21 — Live browser/device QA and release verification
 - [ ] Stage 22 — Secure account system and cloud watchlist sync (requires authentication/security design and hosting decision)
 - [ ] Stage 23 — Final provider enrichment run and data coverage review
+
+- [x] Stage 23 — TMDB attribution notice and licensing policy documented (approved logo asset integration still pending)
+- [x] Stage 22 — Scheduled/manual catalogue refresh workflow created (requires TMDB secret; artifact only)
