@@ -1,0 +1,30 @@
+name: BharatDarshan Release Smoke Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: "Public API base URL to verify"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate URL input
+        run: node -e 'const u=new URL(process.env.API_URL); if(u.protocol!=="https:") throw new Error("API_URL must use HTTPS")'
+        env:
+          API_URL: ${{ inputs.api_url }}
+      - name: Verify deployed API
+        env:
+          API_URL: ${{ inputs.api_url }}
+        run: node apps/api/src/smoke.js
