@@ -164,3 +164,10 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 ## Stage 26 — Provider Detail Transparency
 - Provider availability detail rows show platform, region, category (subscription/free/ad-supported/rent/buy), last-checked date, and source link.
 - Metadata is clearly separated from playback links; TMDB links lead to provider-information pages.
+
+
+## Stage 27 — Recently Viewed
+- Local history records the last 30 title detail views.
+- Recently Viewed shelf is available from the home catalogue.
+- Clear History removes local history immediately.
+- History is device/browser-local and is not synced to a server.
