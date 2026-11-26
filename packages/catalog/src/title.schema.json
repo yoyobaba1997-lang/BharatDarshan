@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BharatDarshan Title",
+  "type": "object",
+  "required": ["id", "type", "title"],
+  "properties": {
+    "id": {"type":"string"},
+    "type": {"enum":["movie","series","anime","episode"]},
+    "title": {"type":"string"},
+    "originalTitle": {"type":"string"},
+    "aliases": {"type":"array","items":{"type":"string"}},
+    "overview": {"type":"string"},
+    "releaseDate": {"type":["string","null"],"format":"date"},
+    "year": {"type":["integer","null"]},
+    "genres": {"type":"array","items":{"type":"string"}},
+    "languages": {"type":"array","items":{"type":"string"}},
+    "audioLanguages": {"type":"array","items":{"type":"string"}},
+    "subtitleLanguages": {"type":"array","items":{"type":"string"}},
+    "dubLanguages": {"type":"array","items":{"type":"string"}},
+    "regions": {"type":"array","items":{"type":"string"}},
+    "poster": {"type":["string","null"],"format":"uri"},
+    "backdrop": {"type":["string","null"],"format":"uri"},
+    "rating": {"type":["number","null"]},
+    "sourceIds": {"type":"object","additionalProperties":{"type":"string"}},
+    "seasonNumber": {"type":["integer","null"]},
+    "episodeNumber": {"type":["integer","null"]}
+  },
+  "additionalProperties": false
+}
