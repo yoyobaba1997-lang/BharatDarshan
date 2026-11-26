@@ -35,7 +35,7 @@ const existing = process.env.INGEST_REPLACE === "1" ? [] : (fs.existsSync(output
 const merged = new Map(existing.map(item => [item.id,item]));
 const ingestedAt = new Date().toISOString();
 for (const rawItem of all) {
-  const item = { ...rawItem, ingestion: { ...(rawItem.ingestion||{}), source:"TMDB", ingestedAt, modes:[...new Set([...(rawItem.ingestion?.modes||[]), ...modes])], languages:[...new Set([...(rawItem.ingestion?.languages||[]), ...languages])] } };
+  const item = { ...rawItem, ingestion: { ...(rawItem.ingestion||{}), source:"TMDB", ingestedAt, modes:[...new Set([...(rawItem.ingestion?.modes||[]), ...(rawItem.tags||[]).filter(tag=>["trending","popular","top-rated","indian-language-discovery"].includes(tag))])], languages:[...new Set([...(rawItem.ingestion?.languages||[]), ...(rawItem.tags||[]).filter(tag=>tag.startsWith("language-")).map(tag=>tag.slice(9))])] } };
   const previous = merged.get(item.id);
   if (!previous) { merged.set(item.id,item); continue; }
   const union = (a,b) => [...new Set([...(a||[]),...(b||[])])];
