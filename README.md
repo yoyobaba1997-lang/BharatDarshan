@@ -212,3 +212,10 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Added a dependency-free smoke test script for API health, registry endpoints, stats, quality, catalogue, and export.
 - Run against a deployed API with `API_URL=https://your-api.example npm run smoke --workspace @bharatdarshan/api`.
 - Smoke tests are syntax-checked in CI; actual deployed endpoint checks require a configured API URL.
+
+
+## Stage 32 — Deployment Configuration
+- Example environment variables for API/web ports, CORS origin, and browser-facing API URL.
+- Docker Compose host ports are configurable.
+- Deployment documentation includes config validation, startup, and smoke-test commands.
+- Production public API URL and exact allowed origin still need deployment-specific values.
