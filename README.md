@@ -250,3 +250,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Added dependency-free checks for web HTML, CSS, JavaScript, manifest, and service worker.
 - Manual GitHub Actions release-smoke workflow now accepts both API and web URLs and checks both deployments.
 - Live deployment validation remains pending until the workflow is run with real public URLs.
+
+
+## Stage 38 — API Rate Limiting
+- API applies an in-memory per-IP limit of 120 requests per minute.
+- Excess requests receive HTTP 429 and a retry-after hint.
+- The limiter is process-local and resets on restart; production deployments with multiple instances should use a shared gateway/limiter.
