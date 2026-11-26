@@ -1,0 +1,40 @@
+[
+  {
+    "id":"bd-demo-movie-001",
+    "type":"movie",
+    "title":"Demo Indian Film",
+    "originalTitle":"Demo Indian Film",
+    "aliases":["Sample Movie"],
+    "overview":"Placeholder fixture for testing multilingual catalogue metadata.",
+    "year":2026,
+    "genres":["Drama"],
+    "languages":["hi","or"],
+    "audioLanguages":["hi","or"],
+    "subtitleLanguages":["en"],
+    "dubLanguages":[],
+    "regions":["India"],
+    "poster":null,
+    "backdrop":null,
+    "rating":null,
+    "sourceIds":{}
+  },
+  {
+    "id":"bd-demo-anime-001",
+    "type":"anime",
+    "title":"Demo Anime",
+    "originalTitle":"Demo Anime",
+    "aliases":["Sample Animation"],
+    "overview":"Placeholder anime fixture with language/dub fields.",
+    "year":2026,
+    "genres":["Animation","Adventure"],
+    "languages":["ja"],
+    "audioLanguages":["ja","hi"],
+    "subtitleLanguages":["en","hi"],
+    "dubLanguages":["hi"],
+    "regions":["Japan"],
+    "poster":null,
+    "backdrop":null,
+    "rating":null,
+    "sourceIds":{}
+  }
+]
