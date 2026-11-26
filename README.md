@@ -188,3 +188,10 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 - Provider source links open the corresponding TMDB watch page in a separate tab.
 - A freshness disclaimer warns that regional availability changes and should be checked before purchase/subscription.
 - Provider records are metadata only; no playback URLs are provided.
+
+
+## Stage 27 — Offline Catalogue Cache
+- After a successful API load, the app saves a bounded local catalogue snapshot (up to 700 titles) and its language/platform registries.
+- If the API is unavailable, the app prefers the saved catalogue and clearly labels it with its cache refresh timestamp.
+- If no cache exists, it uses the explicitly labeled demonstration catalogue.
+- Browser storage quota may limit cache persistence; cache write failures are handled without blocking app startup.
