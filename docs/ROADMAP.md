@@ -85,3 +85,5 @@
 - [x] Stage 26 — Provider availability details in title modal, source links, region/category/timestamp and freshness disclaimer
 
 - [x] Stage 27 — Bounded local catalogue cache with offline fallback
+
+- [x] Stage 28 — Validate catalogue image and provider source URLs before rendering
