@@ -28,3 +28,6 @@
 
 /* Stage 23: source attribution */
 .tmdb-attribution a{color:#f6b36e;text-decoration:underline;text-underline-offset:3px}.tmdb-attribution{max-width:900px}
+
+/* Stage 26: provider availability detail records */
+.provider-details{margin:16px 0}.provider-details h3{font-size:14px;margin:0 0 10px;color:#f0bd7b}.provider-record{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid #293443;background:#1a202a;border-radius:8px;padding:10px;margin:7px 0}.provider-record strong{font-size:12px;color:#f1f4f8}.provider-record span{font-size:11px;color:#aab5c4;flex:1}.provider-record a{font-size:11px;color:#f5b36d;text-decoration:underline}
