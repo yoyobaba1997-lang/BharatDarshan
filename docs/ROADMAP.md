@@ -93,3 +93,5 @@
 - [x] Stage 30 — Consolidated production release checklist (live validation remains pending)
 
 - [x] Stage 31 — Dependency-free API deployment smoke-test script
+
+- [x] Stage 32 — Configurable deployment environment and compose ports
