@@ -46,3 +46,7 @@ docker compose up --build -d
 docker compose ps
 API_URL=https://your-api.example npm run smoke --workspace @bharatdarshan/api
 ```
+
+## API rate limiting
+
+The API applies a process-local per-IP request limit. Configure `API_RATE_LIMIT` (default 120 requests) and `API_RATE_WINDOW_MS` (default 60000 ms) in the deployment environment. Invalid values fall back to defaults; accepted ranges are 1–100000 requests and 1000–3600000 ms. A 429 response includes `Retry-After`. For multi-instance production deployments, use a shared gateway or distributed limiter.
