@@ -82,6 +82,8 @@ export async function fetchCatalogueList(kind = "movie", list = "popular", page 
   return { page: data.page, totalPages: data.total_pages, results: (data.results ?? []).map(raw => normalizeTmdbResult(raw, kind === "tv" ? "tv" : "movie")) };
 }
 
+export function normalizeWatchProviderResults(raw,regions=["IN"]){const checkedAt=new Date().toISOString();const output=[];for(const region of regions){const regionData=raw?.results?.[region];if(!regionData)continue;for(const availabilityType of ["flatrate","free","rent","buy"]){for(const provider of regionData[availabilityType]||[]){output.push({platform:provider.provider_name,providerId:provider.provider_id,region,availabilityType,logo:provider.logo_path?`https://image.tmdb.org/t/p/w92${provider.logo_path}`:null,source:"TMDB",sourceUrl:regionData.link||null,checkedAt});}}}return output;}
+export async function fetchWatchProviders(kind="movie",id,regions=["IN"]){if(!id)throw new Error("TMDB id required for watch-provider lookup");const data=await tmdbRequest(`/${kind}/${id}/watch/providers`);return normalizeWatchProviderResults(data,regions);}
 export async function discoverByLanguage(kind = "movie", language = "hi", page = 1, params = {}) {
   return discoverTmdb(kind, { with_original_language: language, page, sort_by: "popularity.desc", ...params });
 }
