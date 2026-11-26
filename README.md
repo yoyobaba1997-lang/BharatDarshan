@@ -177,3 +177,7 @@ BharatDarshan is metadata and discovery-first. Stream integrations must be autho
 - Automated smoke test starts the web server and checks HTML/runtime API configuration.
 - Verifies security headers and PWA assets (CSS, JS, manifest, service worker, icon).
 - Web smoke tests are included in workspace CI.
+
+
+## Verified CI
+The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c100f993ade9b374ef5ee95c0`. It passed workspace tests, syntax checks, and API/web Docker image builds.
