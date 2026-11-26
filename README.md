@@ -206,3 +206,9 @@ The latest verified CI run completed successfully for commit `4e5cb4c01d2ef08c10
 ## Stage 29 — API Integration Test Expansion
 - Tests API security headers, health, catalogue paging, statistics, quality report, export, platform filtering, and invalid pagination/search input.
 - The test suite is part of the repository CI workflow; actual CI result still requires checking the latest run.
+
+
+## Stage 31 — Deployment Smoke Tests
+- Added a dependency-free smoke test script for API health, registry endpoints, stats, quality, catalogue, and export.
+- Run against a deployed API with `API_URL=https://your-api.example npm run smoke --workspace @bharatdarshan/api`.
+- Smoke tests are syntax-checked in CI; actual deployed endpoint checks require a configured API URL.
