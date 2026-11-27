@@ -12,6 +12,7 @@ const checks=[
   {route:"/export",validate:data=>{if(!Array.isArray(data.items)||!data.schemaVersion)throw new Error("Export response schema invalid");}}
 ];
 const securityHeaders=["x-content-type-options","x-frame-options","referrer-policy","permissions-policy"];
+const expectedWebOrigin=process.env.WEB_ORIGIN;
 let failed=0;
 for(const check of checks){
   try{
@@ -30,8 +31,9 @@ try{
   console.log("PASS unsupported-method handling");
 }catch(error){failed++;console.error("FAIL unsupported-method handling",error.message);}
 try{
-  const response=await fetch(base+"/health",{method:"OPTIONS",signal:AbortSignal.timeout(timeoutMs)});
+  const response=await fetch(base+"/health",{method:"OPTIONS",headers:expectedWebOrigin?{origin:expectedWebOrigin}:{},signal:AbortSignal.timeout(timeoutMs)});
   if(response.status!==204)throw new Error(`Expected 204, got ${response.status}`);
+  if(expectedWebOrigin&&response.headers.get("access-control-allow-origin")!==expectedWebOrigin)throw new Error("CORS allow-origin does not match configured web origin");
   for(const header of securityHeaders)if(!response.headers.has(header))throw new Error(`Missing security header: ${header}`);
   console.log("PASS OPTIONS preflight");
 }catch(error){failed++;console.error("FAIL OPTIONS preflight",error.message);}
