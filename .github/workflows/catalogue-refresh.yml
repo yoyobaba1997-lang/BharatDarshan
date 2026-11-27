@@ -17,9 +17,17 @@ on:
         description: "Maximum titles for provider enrichment (1–500)"
         required: false
         default: "100"
+      commit_snapshot:
+        description: "Commit the audited catalogue snapshot to main (manual runs only)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: catalogue-refresh
@@ -34,6 +42,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Validate TMDB credential is configured
+        env:
+          TMDB_READ_ACCESS_TOKEN: ${{ secrets.TMDB_READ_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$TMDB_READ_ACCESS_TOKEN" ]; then
+            echo "::error::Repository secret TMDB_READ_ACCESS_TOKEN is missing. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
       - run: npm install
       - run: npm run check
       - run: npm test
@@ -51,6 +67,18 @@ jobs:
         run: npm run ingest
       - name: Audit generated catalogue
         run: npm run audit
+      - name: Commit audited snapshot (manual opt-in)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.commit_snapshot == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/catalog/src/ingested-catalog.json
+          if git diff --cached --quiet; then
+            echo "Catalogue snapshot is unchanged; no commit created."
+          else
+            git commit -m "chore(catalog): refresh audited TMDB snapshot"
+            git push
+          fi
       - name: Upload catalogue snapshot
         uses: actions/upload-artifact@v4
         with:
