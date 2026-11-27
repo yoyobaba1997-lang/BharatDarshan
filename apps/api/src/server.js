@@ -13,12 +13,13 @@ const catalogue = JSON.parse(fs.readFileSync(activePath, "utf8")).map(normalizeT
 const PORT = Number(process.env.PORT || 3000);
 const API_STARTED_AT = new Date().toISOString();
 
-function send(res, status, body) {
-  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*", "x-content-type-options":"nosniff", "x-frame-options":"DENY", "referrer-policy":"no-referrer", "permissions-policy":"camera=(), microphone=(), geolocation=()", "vary":"Origin", "cache-control":"public, max-age=60" });
+function securityHeaders() { return { "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*", "x-content-type-options":"nosniff", "x-frame-options":"DENY", "referrer-policy":"no-referrer", "permissions-policy":"camera=(), microphone=(), geolocation=()", "vary":"Origin" }; }
+function send(res, status, body, extraHeaders = {}) {
+  res.writeHead(status, { "content-type": "application/json; charset=utf-8", ...securityHeaders(), "cache-control":status===200 && res.req?.url!=="/health" ? "public, max-age=60" : "no-store", ...extraHeaders });
   res.end(JSON.stringify(body, null, 2));
 }
 
-const rateBuckets=new Map();const envInt=(name,fallback,min,max)=>{const raw=process.env[name];if(raw===undefined||raw==="")return fallback;const value=Number(raw);return Number.isInteger(value)&&value>=min&&value<=max?value:fallback;};const RATE_LIMIT=envInt("API_RATE_LIMIT",120,1,100000);const RATE_WINDOW_MS=envInt("API_RATE_WINDOW_MS",60000,1000,3600000);function checkRateLimit(ip){const now=Date.now();const bucket=rateBuckets.get(ip);if(!bucket||now-bucket.startedAt>=RATE_WINDOW_MS){rateBuckets.set(ip,{startedAt:now,count:1});return true;}bucket.count++;return bucket.count<=RATE_LIMIT;}setInterval(()=>{const now=Date.now();for(const [ip,bucket] of rateBuckets)if(now-bucket.startedAt>=RATE_WINDOW_MS)rateBuckets.delete(ip);},Math.min(RATE_WINDOW_MS,60000)).unref();
+const rateBuckets=new Map();const MAX_RATE_BUCKETS=10000;const envInt=(name,fallback,min,max)=>{const raw=process.env[name];if(raw===undefined||raw==="")return fallback;const value=Number(raw);return Number.isInteger(value)&&value>=min&&value<=max?value:fallback;};const RATE_LIMIT=envInt("API_RATE_LIMIT",120,1,100000);const RATE_WINDOW_MS=envInt("API_RATE_WINDOW_MS",60000,1000,3600000);function checkRateLimit(ip){const now=Date.now();const bucket=rateBuckets.get(ip);if(!bucket||now-bucket.startedAt>=RATE_WINDOW_MS){if(rateBuckets.size>=MAX_RATE_BUCKETS&&!bucket){const oldest=rateBuckets.keys().next().value;if(oldest!==undefined)rateBuckets.delete(oldest);}rateBuckets.set(ip,{startedAt:now,count:1});return true;}bucket.count++;return bucket.count<=RATE_LIMIT;}setInterval(()=>{const now=Date.now();for(const [ip,bucket] of rateBuckets)if(now-bucket.startedAt>=RATE_WINDOW_MS)rateBuckets.delete(ip);},Math.min(RATE_WINDOW_MS,60000)).unref();
 const server = http.createServer((req, res) => {
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
@@ -28,7 +29,8 @@ const server = http.createServer((req, res) => {
     });
     return res.end();
   }
-  const clientIp=req.socket.remoteAddress||"unknown";if(!checkRateLimit(clientIp)){res.writeHead(429,{"content-type":"application/json; charset=utf-8","retry-after":String(Math.ceil(RATE_WINDOW_MS/1000)),"x-content-type-options":"nosniff"});return res.end(JSON.stringify({error:"Rate limit exceeded. Retry in about one minute."}));}
+  if (req.method !== "GET") return send(res, 405, { error: "Method not allowed", allowedMethods: ["GET", "OPTIONS"] }, { "allow":"GET, OPTIONS" });
+  const clientIp=req.socket.remoteAddress||"unknown";if(!checkRateLimit(clientIp))return send(res,429,{error:`Rate limit exceeded. Retry after ${Math.ceil(RATE_WINDOW_MS/1000)} seconds.`},{"retry-after":String(Math.ceil(RATE_WINDOW_MS/1000))});
   const url = new URL(req.url, "http://localhost");
   if (url.pathname === "/health") return send(res, 200, { ok: true, name: "BharatDarshan API", version: "0.1.0", catalogueCount: catalogue.length, catalogueSource: path.basename(activePath), checkedAt: new Date().toISOString() });
   if (url.pathname === "/languages") return send(res, 200, languageRegistry);
@@ -59,7 +61,7 @@ const server = http.createServer((req, res) => {
     const requestedLimit=Number(url.searchParams.get("limit")||50);const requestedOffset=Number(url.searchParams.get("offset")||0);if(!Number.isInteger(requestedLimit)||requestedLimit<1||requestedLimit>100||!Number.isInteger(requestedOffset)||requestedOffset<0)return send(res,400,{error:"limit must be 1–100 and offset must be a non-negative integer"});const limit=requestedLimit;const offset=requestedOffset;
     return send(res, 200, { total: results.length, limit, offset, results: results.slice(offset, offset + limit) });
   }
-  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalog", "/shelves", "/quality", "/stats", "/export"] });
+  return send(res, 404, { error: "Not found", availableRoutes: ["/health", "/languages", "/categories", "/platforms", "/catalogue-meta", "/catalog", "/shelves", "/quality", "/stats", "/export"] });
 });
 
 server.listen(PORT, "0.0.0.0", () => {
