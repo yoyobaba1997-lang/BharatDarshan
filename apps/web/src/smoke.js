@@ -41,4 +41,4 @@ try{
   for(const header of securityHeaders)if(!response.headers.has(header))throw new Error("Missing security header: "+header);
   console.log("PASS OPTIONS preflight");
 }catch(error){failed++;console.error("FAIL OPTIONS preflight",error.message);}
-if(failed)process.exitCode=1;else console.log("Web release smoke checks passed against "+base+" ("+checks.length+3+" checks)");
+if(failed)process.exitCode=1;else console.log(`Web release smoke checks passed against ${base} (${checks.length + 3} checks)`);
