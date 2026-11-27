@@ -108,9 +108,11 @@
 - [x] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
 - [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
 - [x] Stage 42 — API security/error-handling review and regression tests added (runtime execution pending)
-- [ ] Stage 43 — Production runtime verification and CI confirmation for Stage 42
+- [x] Stage 43 — Strengthened API/web release smoke scripts and CI local-runtime integration test (live deployment verification still pending)
+- [ ] Stage 44 — Live production runtime verification once BharatDarshan deployment URLs are configured
 
 ## Current verification status
 - Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, web Docker build).
-- Stage 42 security hardening and regression tests have since been committed; CI for the Stage 42 commits is pending confirmation.
-- Tests have not been executed locally in this environment.
+- Stage 42 commit `0df48b4` was screenshot-confirmed green in GitHub Actions run #249.
+- Stage 43 strengthened API/web smoke scripts and added a local-server integration test that runs both smoke scripts inside CI.
+- Stage 43 CI is pending confirmation; live production runtime verification remains pending because no BharatDarshan Render service was found in the selected workspace (the listed Render service is a separate `bharatflix-catalog` project).
