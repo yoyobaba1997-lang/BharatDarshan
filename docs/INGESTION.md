@@ -18,6 +18,24 @@ Optional environment variables:
 - `INGEST_LANGUAGES`: comma-separated TMDB language codes for Indian-language discovery; defaults to `hi,ta,te,ml,kn,bn,mr,gu,pa,or,as,ur`.
 - `PORT`: API port, defaults to 3000.
 
-This is a starter importer, not a complete or continuously updated catalogue. Run it manually to refresh. No secret should be committed into Git. Each imported source mode is tagged (`trending`, `popular`, or `top-rated`) so discovery shelves can be built from actual imported source records. Duplicate titles from overlapping modes are merged and their tags/metadata lists are preserved. Indian-language discovery records receive source and language collection tags. The ingestion currently does not import streaming availability/watch-provider data; that requires separate terms/attribution review and provider data handling.
+## Automated refresh via GitHub Actions
+
+The repository includes **BharatDarshan Catalogue Refresh**:
+- Scheduled weekly refresh (artifact-only by default).
+- Manual run from Actions supports optional bounded watch-provider enrichment.
+- The workflow validates that the `TMDB_READ_ACCESS_TOKEN` secret is configured before ingesting.
+- It runs project checks and tests, ingests a fresh snapshot, and audits it before upload.
+- Manual runs include an explicit `commit_snapshot` option. It defaults to `false`; select `true` only after reviewing the generated catalogue. A commit is created only when the snapshot changed.
+- Snapshots are also uploaded as a 30-day workflow artifact.
+
+### Owner setup
+
+1. Open the repository's **Settings → Secrets and variables → Actions**.
+2. Add repository secret `TMDB_READ_ACCESS_TOKEN` (do not paste it into chat, source files, or logs).
+3. Open **Actions → BharatDarshan Catalogue Refresh → Run workflow**.
+4. Keep `commit_snapshot` set to `false` for the first run; download/review the artifact.
+5. If the audit and attribution/terms review are satisfactory, rerun manually and opt into `commit_snapshot=true` to publish the snapshot to `main`.
+
+This importer is not a complete catalogue. Its scope is bounded by source modes, language list, page cap and TMDB API results. No credential is stored in Git. Each imported source mode is tagged (`trending`, `popular`, or `top-rated`) so discovery shelves can be built from imported source records. Duplicate titles from overlapping modes are merged and their tags/metadata lists are preserved. Indian-language discovery records receive source and language collection tags. Provider availability enrichment is optional and bounded; review current TMDB terms/attribution before using or publishing it.
 
 TMDB is used as an external metadata source. Follow TMDB's current attribution rules and do not imply endorsement. Confirm commercial-use licensing before monetization.
