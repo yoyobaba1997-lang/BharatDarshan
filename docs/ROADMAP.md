@@ -97,7 +97,7 @@
 - [x] Stage 44 — Web/API security headers for errors and preflight; method policy and release-smoke coverage strengthened
 - [x] Stage 45 — Render deployment, live smoke workflow, CORS-origin and API URL-injection checks
 - [x] Stage 46 — Verify public production API and Web endpoints through GitHub Actions
-- [x] Stage 47 — Safer catalogue refresh: fail-fast secret check, audited artifact, manual opt-in snapshot commit, and owner setup documentation
+- [x] Stage 47 — Safer catalogue refresh: fail-fast secret check, audited artifact, manual opt-in snapshot commit, and owner setup documentation\n- [x] Stage 48 — Document language-registry vs TMDB-discovery coverage limits and safe expansion process
 
 ## Current verification status
 - Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, Web Docker build).
@@ -109,3 +109,5 @@
 - Production smoke run #45922237449 passed: public API 11 checks; public Web 8 checks.
 - Latest confirmed commit before Stage 47 was `a4830d4`; both `ci/bharatdarshan` and `render/production-smoke` statuses were green.
 - Catalogue data remains demo/sample until TMDB ingestion is run with the repository owner's secret.
+
+- Stage 48 clarifies that the language registry is inclusive while TMDB ingestion is limited to codes verified for TMDB discovery; additional languages require source-support verification before ingestion.
