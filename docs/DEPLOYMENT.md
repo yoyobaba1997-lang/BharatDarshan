@@ -48,7 +48,16 @@ API_URL=https://your-api.example npm run smoke --workspace @bharatdarshan/api
 WEB_URL=https://your-web.example npm run smoke --workspace @bharatdarshan/web
 ```
 
-The API release smoke check validates health, catalogue provenance, language/category/platform registries, stats, quality, catalogue search, export, required security headers, unsupported-method handling, and OPTIONS preflight. The web smoke check validates the HTML, CSS, JavaScript, PWA manifest, service worker, security headers, 404 handling, unsupported methods, and OPTIONS preflight. The static web server applies security headers to successful responses, 403/404 errors, 405 responses, and preflight responses. CI runs both checks against isolated local API and web servers via the API workspace test suite; live public endpoints still require a manual release-smoke workflow dispatch with HTTPS URLs.
+The API release smoke check validates health, catalogue provenance, language/category/platform registries, stats, quality, catalogue search, export, required security headers, unsupported-method handling, and OPTIONS preflight. The web smoke check validates the HTML, CSS, JavaScript, PWA manifest, service worker, security headers, 404 handling, unsupported methods, and OPTIONS preflight. The static web server applies security headers to successful responses, 403/404 errors, 405 responses, and preflight responses. CI runs both checks against isolated local servers via the API workspace test suite. `.github/workflows/production-smoke.yml` waits for the public Render services and runs the same checks against the deployed endpoints on every push to `main`, publishing a `render/production-smoke` commit status.
+
+## Render deployment
+
+Two free-plan Render Web Services are deployed from the repository root and track `main` in the Singapore region:
+
+- API: `https://bharatdarshan-api.onrender.com` (`npm install`; `npm run start --workspace @bharatdarshan/api`)
+- Web: `https://bharatdarshan-web.onrender.com` (`npm install`; `WEB_PORT=$PORT npm run start --workspace @bharatdarshan/web`)
+
+The Web service receives `BHARATDARSHAN_API` pointing to the API URL. The API `ALLOWED_ORIGIN` is restricted to the Web origin. Both services have automatic deploys enabled. Free-plan services may spin down when idle; allow for cold-start delay. The current catalogue remains the repository sample/demo data until a TMDB ingestion is run with an owner-managed secret.
 
 ## API rate limiting
 
