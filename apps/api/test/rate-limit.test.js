@@ -8,10 +8,38 @@ async function startApi(t, envOverrides = {}) {
   const child = spawn(process.execPath, ["src/server.js"], {
     cwd: new URL("../", import.meta.url),
     env: { ...process.env, PORT: String(port), ...envOverrides },
-    stdio: "ignore"
+    stdio: ["ignore", "pipe", "pipe"]
   });
-  t.after(() => child.kill());
-  await new Promise(resolve => setTimeout(resolve, 350));
+
+  let stdout = "";
+  let stderr = "";
+  child.stdout.setEncoding("utf8");
+  child.stderr.setEncoding("utf8");
+  child.stdout.on("data", chunk => { stdout += chunk; });
+  child.stderr.on("data", chunk => { stderr += chunk; });
+
+  t.after(() => {
+    if (!child.killed) child.kill();
+  });
+
+  await new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => reject(new Error(`API startup timed out. stdout: ${stdout}; stderr: ${stderr}`)), 5000);
+    const onReady = () => {
+      if (stdout.includes("BharatDarshan API listening on")) {
+        clearTimeout(timeout);
+        child.off("exit", onExit);
+        resolve();
+      }
+    };
+    const onExit = (code, signal) => {
+      clearTimeout(timeout);
+      reject(new Error(`API exited before startup (code=${code}, signal=${signal}). stdout: ${stdout}; stderr: ${stderr}`));
+    };
+    child.stdout.on("data", onReady);
+    child.once("exit", onExit);
+    onReady();
+  });
+
   return { base, child };
 }
 
