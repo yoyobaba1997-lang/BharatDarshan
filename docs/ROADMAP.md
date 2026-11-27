@@ -107,9 +107,10 @@
 ## Next implementation stages
 - [x] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
 - [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
-- [ ] Stage 42 — Security/error-handling review and production runtime verification
+- [x] Stage 42 — API security/error-handling review and regression tests added (runtime execution pending)
+- [ ] Stage 43 — Production runtime verification and CI confirmation for Stage 42
 
 ## Current verification status
-- Latest code changes are pushed to `main`; push-triggered CI is expected to run.
-- CI is **not considered confirmed green** until a workflow run for the latest commit is fetched and reports success.
-- Rate-limit integration tests are committed; local execution is not available in this environment.
+- Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, web Docker build).
+- Stage 42 security hardening and regression tests have since been committed; CI for the Stage 42 commits is pending confirmation.
+- Tests have not been executed locally in this environment.
