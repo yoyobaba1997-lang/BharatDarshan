@@ -27,7 +27,8 @@
 - [x] Retry/backoff for rate limits and transient errors
 - [x] Optional region-aware watch-provider metadata enrichment
 - [ ] Run ingestion with owner-provided credential and review the resulting snapshot
-- [ ] Scheduled refresh automation (requires hosting/secret configuration)
+- [x] Scheduled/manual catalogue refresh workflow with artifact upload
+- [x] Manual opt-in audited snapshot publishing (Stage 47; requires TMDB secret)
 
 ## Integrations
 - [x] Generic metadata adapter contract and fixture tests
@@ -38,11 +39,12 @@
 ## Deployment & quality
 - [x] Dockerfiles and Docker Compose
 - [x] API and web health checks
-- [x] GitHub Actions CI workflow (latest run still requires verification)
+- [x] GitHub Actions CI workflow
 - [x] Release and deployment checklist documentation
-- [x] CI latest run verified green (run 45893141187; npm test, npm run check, and Docker builds passed)
+- [x] CI verified green for latest confirmed code (run #265; later commits require fresh status)
 - [ ] Source/legal/attribution review
-- [x] Render free-plan API and Web services deployed (public HTTP smoke verification pending)
+- [x] Render free-plan API and Web services deployed
+- [x] Public API and Web smoke checks verified
 - [ ] Browser/mobile/Fire TV runtime QA
 - [ ] Provider metadata enrichment run and coverage review
 
@@ -60,9 +62,9 @@
 - [x] Stage 20 — Optional TMDB provider-availability metadata integration
 
 ## Release status
-**Source implementation:** substantially complete through Stage 20.
+**Source implementation:** substantially complete through Stage 47.
 
-**Production release remains pending:** CI verification, TMDB credentials and ingestion, provider enrichment run, source/legal review, deployment configuration, and browser/mobile/Fire TV runtime QA.
+**Production release remains catalogue-data dependent:** TMDB secret setup and ingestion, catalogue snapshot review, source/legal/attribution review, provider enrichment review, and browser/mobile/Fire TV runtime QA.
 
 ## Future stages
 - [ ] Stage 21 — Live browser/device QA and release verification
@@ -70,50 +72,40 @@
 - [ ] Stage 23 — Final provider enrichment run and data coverage review
 
 - [x] Stage 23 — TMDB attribution notice and licensing policy documented (approved logo asset integration still pending)
-- [x] Stage 22 — Scheduled/manual catalogue refresh workflow created (requires TMDB secret; artifact only)
+- [x] Stage 22 — Scheduled/manual catalogue refresh workflow created
 
 - [x] Stage 24 — API input validation, security headers, and integration test coverage
-
 - [x] Stage 25 — Streaming platform discovery filters
-
 - [x] Stage 26 — Provider availability details in title modal, source links, region/category/timestamp and freshness disclaimer
-
 - [x] Stage 27 — Bounded local catalogue cache with offline fallback
-
 - [x] Stage 28 — Validate catalogue image and provider source URLs before rendering
-
 - [x] Stage 29 — Expanded API integration coverage for security, filters, exports and validation
-
-- [x] Stage 30 — Consolidated production release checklist (live validation remains pending)
-
+- [x] Stage 30 — Consolidated production release checklist
 - [x] Stage 31 — Dependency-free API deployment smoke-test script
-
 - [x] Stage 32 — Configurable deployment environment and compose ports
-
 - [x] Stage 33 — Manual HTTPS release smoke-check workflow
-
 - [x] Stage 34 — Catalogue provenance/freshness metadata endpoint
-
-- [x] Stage 35 — Dashboard catalogue source and snapshot freshness indicators
-
+- [x] Stage 35 — Dashboard catalogue source and freshness indicators
 - [x] Stage 36 — Provider metadata coverage and timestamp freshness audit
-
-- [x] Stage 37 — Web app smoke-test script and combined manual release verification workflow
-
+- [x] Stage 37 — Web smoke-test script and combined manual release verification workflow
 - [x] Stage 38 — Process-local API per-IP rate limiting
-
-- [x] Stage 39 — Configurable per-IP API rate limit and Retry-After response; operational settings documented
-
-## Next implementation stages
+- [x] Stage 39 — Configurable per-IP API rate limit and Retry-After response
 - [x] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
 - [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
-- [x] Stage 42 — API security/error-handling review and regression tests; CI run #249 confirmed green
+- [x] Stage 42 — API security/error-handling review and regression tests
 - [x] Stage 43 — Strengthened API/web release smoke scripts, local-runtime integration test, and HTTPS endpoint validation
-- [x] Stage 44 — Web/API security headers for errors and preflight; method policy and release-smoke coverage strengthened; CI run #265 confirmed green
-- [x] Stage 45 — Deploy API/Web to Render Singapore free plan; add automated live smoke workflow, CORS-origin and API URL-injection checks\n- [x] Stage 46 — Verify public production API and Web endpoints through GitHub Actions run #45922237449 (API 11 checks; Web 8 checks)
+- [x] Stage 44 — Web/API security headers for errors and preflight; method policy and release-smoke coverage strengthened
+- [x] Stage 45 — Render deployment, live smoke workflow, CORS-origin and API URL-injection checks
+- [x] Stage 46 — Verify public production API and Web endpoints through GitHub Actions
+- [x] Stage 47 — Safer catalogue refresh: fail-fast secret check, audited artifact, manual opt-in snapshot commit, and owner setup documentation
 
 ## Current verification status
-- Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, web Docker build).
+- Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, Web Docker build).
 - Stage 42 commit `0df48b4` was screenshot-confirmed green in GitHub Actions run #249.
-- Stage 43 strengthened API/web smoke scripts and added a local-server integration test that runs both smoke scripts inside CI.
-- Stage 44 CI was screenshot-confirmed successful in GitHub Actions run #265 for commit `1f037b2` (npm test, npm run check, API Docker build, and Web Docker build all passed).\n- Render services `bharatdarshan-api` and `bharatdarshan-web` were created in My Workspace on the free plan, Singapore region, and Render reported both initial deployments as live.\n- API CORS is restricted to `https://bharatdarshan-web.onrender.com`; Web is configured with `https://bharatdarshan-api.onrender.com`.\n- Production smoke run #45922237449 completed successfully on commit `c195b205`: public API health and all 11 API smoke checks passed; the public Web homepage and all 8 Web smoke checks passed. The workflow published `render/production-smoke=success`.\n- The CI workflow now also publishes a `ci/bharatdarshan` commit status on main-branch pushes, enabling direct status verification. Latest follow-up commits are being checked.\n- Catalogue data remains demo/sample until TMDB ingestion is run with the repository owner’s secret.
+- Stage 43 strengthened API/Web smoke scripts and added a local-server integration test that runs both smoke scripts inside CI.
+- Stage 44 CI was screenshot-confirmed successful in GitHub Actions run #265 for commit `1f037b2` (npm test, npm run check, API Docker build, Web Docker build).
+- Render services `bharatdarshan-api` and `bharatdarshan-web` are configured on the free plan in Singapore.
+- API CORS is restricted to `https://bharatdarshan-web.onrender.com`; Web is configured with `https://bharatdarshan-api.onrender.com`.
+- Production smoke run #45922237449 passed: public API 11 checks; public Web 8 checks.
+- Latest confirmed commit before Stage 47 was `a4830d4`; both `ci/bharatdarshan` and `render/production-smoke` statuses were green.
+- Catalogue data remains demo/sample until TMDB ingestion is run with the repository owner's secret.
