@@ -39,3 +39,10 @@ The repository includes **BharatDarshan Catalogue Refresh**:
 This importer is not a complete catalogue. Its scope is bounded by source modes, language list, page cap and TMDB API results. No credential is stored in Git. Each imported source mode is tagged (`trending`, `popular`, or `top-rated`) so discovery shelves can be built from imported source records. Duplicate titles from overlapping modes are merged and their tags/metadata lists are preserved. Indian-language discovery records receive source and language collection tags. Provider availability enrichment is optional and bounded; review current TMDB terms/attribution before using or publishing it.
 
 TMDB is used as an external metadata source. Follow TMDB's current attribution rules and do not imply endorsement. Confirm commercial-use licensing before monetization.
+
+
+## Indian-language coverage notes
+
+The language registry is broader than TMDB's discover-by-language API. Registry entries represent languages and variants the app can display, search, filter, and label; they do **not** guarantee that TMDB has a discoverable film/series corpus or accepts that code for discovery. The default ingestion list intentionally uses a conservative set of language codes currently configured for TMDB discovery: `hi,ta,te,ml,kn,bn,mr,gu,pa,or,as,ur`. Do not blindly pass every registry code to TMDB. For each additional code, verify it against TMDB's current language/discovery support and test returned results before expanding the ingestion workflow. Languages not available through TMDB discovery may still be added through a separately licensed/authorized metadata source or curated records.
+
+**Coverage is not completeness:** a successful ingestion is a bounded snapshot based on source modes, page limits, API support, and returned results. The app's language registry and catalogue UI should remain inclusive even when ingestion sources are incomplete.
