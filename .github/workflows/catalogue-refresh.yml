@@ -66,7 +66,7 @@ jobs:
           INGEST_REPLACE: "1"
         run: npm run ingest
       - name: Audit generated catalogue
-        run: npm run audit
+        run: npm run audit --workspace @bharatdarshan/api
       - name: Commit audited snapshot (manual opt-in)
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.commit_snapshot == 'true'
         run: |
