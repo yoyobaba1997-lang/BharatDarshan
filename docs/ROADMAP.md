@@ -98,6 +98,7 @@
 - [x] Stage 45 — Render deployment, live smoke workflow, CORS-origin and API URL-injection checks
 - [x] Stage 46 — Verify public production API and Web endpoints through GitHub Actions
 - [x] Stage 47 — Safer catalogue refresh: fail-fast secret check, audited artifact, manual opt-in snapshot commit, and owner setup documentation\n- [x] Stage 48 — Document language-registry vs TMDB-discovery coverage limits and safe expansion process
+- [x] Stage 49 — Replace fixed-delay rate-limit test startup with deterministic readiness detection and failure diagnostics
 
 ## Current verification status
 - Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, Web Docker build).
@@ -111,3 +112,4 @@
 - Catalogue data remains demo/sample until TMDB ingestion is run with the repository owner's secret.
 
 - Stage 48 clarifies that the language registry is inclusive while TMDB ingestion is limited to codes verified for TMDB discovery; additional languages require source-support verification before ingestion.
+- Stage 49 makes API test-server startup deterministic by waiting for the actual listening log, with a bounded timeout and startup error diagnostics. CI verification for this change is pending.
