@@ -109,10 +109,11 @@
 - [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
 - [x] Stage 42 — API security/error-handling review and regression tests added (runtime execution pending)
 - [x] Stage 43 — Strengthened API/web release smoke scripts, local-runtime integration test, and HTTPS endpoint validation (CI pending; live deployment verification still pending)
-- [ ] Stage 44 — Live production runtime verification once BharatDarshan deployment URLs are configured
+- [x] Stage 44 — Web/API security headers for errors and preflight; method policy and release-smoke coverage strengthened; local smoke test working-directory fix (CI pending)
+- [ ] Stage 45 — Confirm CI for Stage 44 and live runtime verification when deployment URLs are configured
 
 ## Current verification status
 - Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, web Docker build).
 - Stage 42 commit `0df48b4` was screenshot-confirmed green in GitHub Actions run #249.
 - Stage 43 strengthened API/web smoke scripts and added a local-server integration test that runs both smoke scripts inside CI.
-- Stage 43 CI is pending confirmation; live production runtime verification remains pending because no BharatDarshan Render service was found in the selected workspace (the listed Render service is a separate `bharatflix-catalog` project).
+- Stage 43 CI remains unconfirmed by the connector. Stage 44 changes are pushed and pending CI verification. Live production runtime verification remains pending because no BharatDarshan Render service was found in the selected workspace (the listed Render service is a separate `bharatflix-catalog` project).
