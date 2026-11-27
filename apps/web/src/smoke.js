@@ -6,7 +6,7 @@ const checks=[
   ["/styles.css","text/css",["provider-details","dashboard"]],
   ["/app.js","javascript",["function init","catalogueMeta","watchlist"]],
   ["/manifest.webmanifest","application/manifest",["BharatDarshan"]],
-  ["/sw.js","javascript",["serviceWorker"]]
+  ["/sw.js","javascript",["install","fetch"]]
 ];
 let failed=0;
 for(const [route,type,markers] of checks){
