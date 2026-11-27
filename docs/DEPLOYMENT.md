@@ -45,7 +45,10 @@ docker compose config
 docker compose up --build -d
 docker compose ps
 API_URL=https://your-api.example npm run smoke --workspace @bharatdarshan/api
+WEB_URL=https://your-web.example npm run smoke --workspace @bharatdarshan/web
 ```
+
+The API release smoke check validates health, catalogue provenance, language/category/platform registries, stats, quality, catalogue search, export, required security headers, and unsupported-method handling. The web smoke check validates the HTML, CSS, JavaScript, PWA manifest, service worker, security headers, and 404 handling. CI runs both checks against isolated local API and web servers via the API workspace test suite; live public endpoints still require a manual release-smoke workflow dispatch with HTTPS URLs.
 
 ## API rate limiting
 
