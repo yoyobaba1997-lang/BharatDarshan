@@ -22,11 +22,7 @@ function send(res, status, body, extraHeaders = {}) {
 const rateBuckets=new Map();const MAX_RATE_BUCKETS=10000;const envInt=(name,fallback,min,max)=>{const raw=process.env[name];if(raw===undefined||raw==="")return fallback;const value=Number(raw);return Number.isInteger(value)&&value>=min&&value<=max?value:fallback;};const RATE_LIMIT=envInt("API_RATE_LIMIT",120,1,100000);const RATE_WINDOW_MS=envInt("API_RATE_WINDOW_MS",60000,1000,3600000);function checkRateLimit(ip){const now=Date.now();const bucket=rateBuckets.get(ip);if(!bucket||now-bucket.startedAt>=RATE_WINDOW_MS){if(rateBuckets.size>=MAX_RATE_BUCKETS&&!bucket){const oldest=rateBuckets.keys().next().value;if(oldest!==undefined)rateBuckets.delete(oldest);}rateBuckets.set(ip,{startedAt:now,count:1});return true;}bucket.count++;return bucket.count<=RATE_LIMIT;}setInterval(()=>{const now=Date.now();for(const [ip,bucket] of rateBuckets)if(now-bucket.startedAt>=RATE_WINDOW_MS)rateBuckets.delete(ip);},Math.min(RATE_WINDOW_MS,60000)).unref();
 const server = http.createServer((req, res) => {
   if (req.method === "OPTIONS") {
-    res.writeHead(204, {
-      "access-control-allow-origin": process.env.ALLOWED_ORIGIN || "*",
-      "access-control-allow-methods": "GET,OPTIONS",
-      "access-control-allow-headers": "Content-Type"
-    });
+    res.writeHead(204, { ...securityHeaders(), "access-control-allow-methods": "GET,OPTIONS", "access-control-allow-headers": "Content-Type", "cache-control": "no-store" });
     return res.end();
   }
   if (req.method !== "GET") return send(res, 405, { error: "Method not allowed", allowedMethods: ["GET", "OPTIONS"] }, { "allow":"GET, OPTIONS" });
