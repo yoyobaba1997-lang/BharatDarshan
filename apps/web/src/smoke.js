@@ -1,6 +1,7 @@
 const base=String(process.env.WEB_URL||"http://localhost:4173").replace(/\/$/,"");
 const timeoutMs=Number(process.env.SMOKE_TIMEOUT_MS||10000);
 const securityHeaders=["x-content-type-options","x-frame-options","referrer-policy","permissions-policy"];
+const expectedApi=process.env.BHARATDARSHAN_API;
 const checks=[
   ["/","text/html",["BharatDarshan","detail-modal","watchlist"]],
   ["/styles.css","text/css",["provider-details","dashboard"]],
@@ -18,6 +19,7 @@ for(const [route,type,markers] of checks){
     for(const header of securityHeaders)if(!response.headers.has(header))throw new Error("Missing security header: "+header);
     const body=await response.text();
     for(const marker of markers)if(!body.includes(marker))throw new Error("Missing expected marker "+marker);
+    if(route==="/"&&expectedApi&&!body.includes(JSON.stringify(expectedApi)))throw new Error("Web page does not expose the configured BharatDarshan API URL");
     console.log("PASS",route);
   }catch(error){failed++;console.error("FAIL",route,error.message);}
 }
