@@ -24,10 +24,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Validate URL input
-        run: node -e 'const u=new URL(process.env.API_URL); if(u.protocol!=="https:") throw new Error("API_URL must use HTTPS")'
+      - name: Validate public URL inputs
+        run: node -e 'for (const [name,value] of [["API_URL",process.env.API_URL],["WEB_URL",process.env.WEB_URL]]) { const u=new URL(value); if(u.protocol!=="https:") throw new Error(name+" must use HTTPS"); if(u.username||u.password) throw new Error(name+" must not contain credentials"); }'
         env:
           API_URL: ${{ inputs.api_url }}
+          WEB_URL: ${{ inputs.web_url }}
       - name: Verify deployed API
         env:
           API_URL: ${{ inputs.api_url }}
