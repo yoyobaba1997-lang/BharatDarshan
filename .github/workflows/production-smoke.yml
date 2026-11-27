@@ -1,0 +1,88 @@
+name: BharatDarshan Production Smoke
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  production-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      API_URL: https://bharatdarshan-api.onrender.com
+      WEB_URL: https://bharatdarshan-web.onrender.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Mark production status pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state=pending -f context=render/production-smoke -f description="Waiting for Render API and Web deployments" -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      - name: Wait for public API deployment
+        run: |
+          node --input-type=module <<'NODE'
+          const deadline = Date.now() + 8 * 60 * 1000;
+          let lastError = "No successful health response";
+          while (Date.now() < deadline) {
+            try {
+              const response = await fetch(process.env.API_URL + "/health", { signal: AbortSignal.timeout(15000) });
+              if (response.ok) {
+                const health = await response.json();
+                if (health.ok === true) {
+                  console.log("API is responding:", JSON.stringify({ catalogueCount: health.catalogueCount, catalogueSource: health.catalogueSource }));
+                  process.exit(0);
+                }
+                lastError = "Health payload did not contain ok=true";
+              } else lastError = "HTTP " + response.status;
+            } catch (error) { lastError = error.message; }
+            console.log("API not ready yet:", lastError);
+            await new Promise(resolve => setTimeout(resolve, 10000));
+          }
+          throw new Error("API did not become healthy within 8 minutes: " + lastError);
+          NODE
+      - name: Run deployed API smoke checks
+        env:
+          WEB_ORIGIN: https://bharatdarshan-web.onrender.com
+          SMOKE_TIMEOUT_MS: "60000"
+        run: node apps/api/src/smoke.js
+      - name: Wait for public Web deployment
+        run: |
+          node --input-type=module <<'NODE'
+          const deadline = Date.now() + 8 * 60 * 1000;
+          let lastError = "No successful homepage response";
+          while (Date.now() < deadline) {
+            try {
+              const response = await fetch(process.env.WEB_URL + "/", { signal: AbortSignal.timeout(15000) });
+              if (response.ok && (response.headers.get("content-type") || "").includes("text/html")) {
+                console.log("Web homepage is responding with HTML");
+                process.exit(0);
+              }
+              lastError = "HTTP " + response.status;
+            } catch (error) { lastError = error.message; }
+            console.log("Web not ready yet:", lastError);
+            await new Promise(resolve => setTimeout(resolve, 10000));
+          }
+          throw new Error("Web did not become ready within 8 minutes: " + lastError);
+          NODE
+      - name: Run deployed Web smoke checks
+        env:
+          BHARATDARSHAN_API: https://bharatdarshan-api.onrender.com
+          SMOKE_TIMEOUT_MS: "60000"
+        run: node apps/web/src/smoke.js
+      - name: Mark production status successful
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state=success -f context=render/production-smoke -f description="Live API and Web release smoke checks passed" -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      - name: Mark production status failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state=failure -f context=render/production-smoke -f description="Live API or Web release smoke checks failed" -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
