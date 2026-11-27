@@ -24,6 +24,11 @@ test("rate limit returns 429 and Retry-After based on configured window", async 
   assert.equal(second.status, 200);
   assert.equal(third.status, 429);
   assert.equal(third.headers.get("retry-after"), "5");
+  assert.equal(third.headers.get("x-content-type-options"), "nosniff");
+  assert.equal(third.headers.get("x-frame-options"), "DENY");
+  assert.equal(third.headers.get("referrer-policy"), "no-referrer");
+  assert.equal(third.headers.get("permissions-policy"), "camera=(), microphone=(), geolocation=()");
+  assert.equal(third.headers.get("cache-control"), "no-store");
   const body = await third.json();
   assert.match(body.error, /Rate limit exceeded/);
 });
