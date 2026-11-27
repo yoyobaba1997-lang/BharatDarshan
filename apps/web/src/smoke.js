@@ -24,6 +24,19 @@ for(const [route,type,markers] of checks){
 try{
   const missing=await fetch(base+"/smoke-test-missing-route",{signal:AbortSignal.timeout(timeoutMs)});
   if(missing.status!==404)throw new Error("Expected HTTP 404, got "+missing.status);
-  console.log("PASS 404 handling");
+  for(const header of securityHeaders)if(!missing.headers.has(header))throw new Error("Missing security header: "+header);
+  console.log("PASS 404 handling with security headers");
 }catch(error){failed++;console.error("FAIL 404 handling",error.message);}
-if(failed)process.exitCode=1;else console.log("Web release smoke checks passed against "+base+" ("+checks.length+1+" checks)");
+try{
+  const response=await fetch(base+"/",{method:"POST",signal:AbortSignal.timeout(timeoutMs)});
+  if(response.status!==405||response.headers.get("allow")!=="GET, OPTIONS")throw new Error("Expected HTTP 405 and Allow header, got "+response.status);
+  for(const header of securityHeaders)if(!response.headers.has(header))throw new Error("Missing security header: "+header);
+  console.log("PASS unsupported-method handling");
+}catch(error){failed++;console.error("FAIL unsupported-method handling",error.message);}
+try{
+  const response=await fetch(base+"/",{method:"OPTIONS",signal:AbortSignal.timeout(timeoutMs)});
+  if(response.status!==204)throw new Error("Expected HTTP 204, got "+response.status);
+  for(const header of securityHeaders)if(!response.headers.has(header))throw new Error("Missing security header: "+header);
+  console.log("PASS OPTIONS preflight");
+}catch(error){failed++;console.error("FAIL OPTIONS preflight",error.message);}
+if(failed)process.exitCode=1;else console.log("Web release smoke checks passed against "+base+" ("+checks.length+3+" checks)");
