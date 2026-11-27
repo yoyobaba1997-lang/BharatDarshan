@@ -28,12 +28,12 @@ function runScript(script,env){
 }
 
 test("API and web release smoke scripts pass against local servers",async t=>{
-  const api=spawn(process.execPath,["apps/api/src/server.js"],{cwd:new URL("../../../",import.meta.url),env:{...process.env,PORT:String(apiPort)},stdio:"ignore"});
+  const api=spawn(process.execPath,["apps/api/src/server.js"],{cwd:new URL("../../../",import.meta.url),env:{...process.env,PORT:String(apiPort),ALLOWED_ORIGIN:webBase},stdio:"ignore"});
   const web=spawn(process.execPath,["apps/web/src/server.js"],{cwd:new URL("../../../",import.meta.url),env:{...process.env,WEB_PORT:String(webPort),BHARATDARSHAN_API:apiBase},stdio:"ignore"});
   t.after(()=>{api.kill();web.kill();});
   await Promise.all([waitFor(apiBase+"/health",api,"API"),waitFor(webBase+"/",web,"Web")]);
-  const apiOutput=await runScript("apps/api/src/smoke.js",{API_URL:apiBase});
+  const apiOutput=await runScript("apps/api/src/smoke.js",{API_URL:apiBase,WEB_ORIGIN:webBase});
   assert.match(apiOutput,/API release smoke checks passed/);
-  const webOutput=await runScript("apps/web/src/smoke.js",{WEB_URL:webBase});
+  const webOutput=await runScript("apps/web/src/smoke.js",{WEB_URL:webBase,BHARATDARSHAN_API:apiBase});
   assert.match(webOutput,/Web release smoke checks passed/);
 });
