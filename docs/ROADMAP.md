@@ -108,7 +108,7 @@
 - [x] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
 - [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
 - [x] Stage 42 — API security/error-handling review and regression tests added (runtime execution pending)
-- [x] Stage 43 — Strengthened API/web release smoke scripts and CI local-runtime integration test (live deployment verification still pending)
+- [x] Stage 43 — Strengthened API/web release smoke scripts, local-runtime integration test, and HTTPS endpoint validation (CI pending; live deployment verification still pending)
 - [ ] Stage 44 — Live production runtime verification once BharatDarshan deployment URLs are configured
 
 ## Current verification status
