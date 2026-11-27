@@ -42,7 +42,7 @@
 - [x] Release and deployment checklist documentation
 - [x] CI latest run verified green (run 45893141187; npm test, npm run check, and Docker builds passed)
 - [ ] Source/legal/attribution review
-- [ ] Production deployment and live health checks
+- [x] Render free-plan API and Web services deployed (public HTTP smoke verification pending)
 - [ ] Browser/mobile/Fire TV runtime QA
 - [ ] Provider metadata enrichment run and coverage review
 
@@ -107,13 +107,13 @@
 ## Next implementation stages
 - [x] Stage 40 — Automated rate-limit integration test and configuration edge-case coverage
 - [x] Stage 41 — Roadmap consolidation and explicit CI/release status tracking
-- [x] Stage 42 — API security/error-handling review and regression tests added (runtime execution pending)
-- [x] Stage 43 — Strengthened API/web release smoke scripts, local-runtime integration test, and HTTPS endpoint validation (CI pending; live deployment verification still pending)
-- [x] Stage 44 — Web/API security headers for errors and preflight; method policy and release-smoke coverage strengthened; local smoke test working-directory fix (CI pending)
-- [ ] Stage 45 — Confirm CI for Stage 44 and live runtime verification when deployment URLs are configured
+- [x] Stage 42 — API security/error-handling review and regression tests; CI run #249 confirmed green
+- [x] Stage 43 — Strengthened API/web release smoke scripts, local-runtime integration test, and HTTPS endpoint validation
+- [x] Stage 44 — Web/API security headers for errors and preflight; method policy and release-smoke coverage strengthened; CI run #265 confirmed green
+- [x] Stage 45 — Deploy API/Web to Render Singapore free plan; add automated live smoke workflow, CORS-origin and API URL-injection checks
 
 ## Current verification status
 - Stage 41 commit `e789f75` was screenshot-confirmed green in GitHub Actions run #242 (npm test, npm run check, API Docker build, web Docker build).
 - Stage 42 commit `0df48b4` was screenshot-confirmed green in GitHub Actions run #249.
 - Stage 43 strengthened API/web smoke scripts and added a local-server integration test that runs both smoke scripts inside CI.
-- Stage 43 CI remains unconfirmed by the connector. Stage 44 changes are pushed and pending CI verification. Live production runtime verification remains pending because no BharatDarshan Render service was found in the selected workspace (the listed Render service is a separate `bharatflix-catalog` project).
+- Stage 44 CI was screenshot-confirmed successful in GitHub Actions run #265 for commit `1f037b2` (npm test, npm run check, API Docker build, and Web Docker build all passed).\n- Render services `bharatdarshan-api` and `bharatdarshan-web` were created in My Workspace on the free plan, Singapore region, and Render reported both initial deployments as live.\n- API CORS is restricted to `https://bharatdarshan-web.onrender.com`; Web is configured with `https://bharatdarshan-api.onrender.com`.\n- A production smoke workflow now waits for both public endpoints, tests the deployed API/Web, and publishes a `render/production-smoke` commit status. Its first execution is pending on the new commit.\n- Catalogue data remains demo/sample until TMDB ingestion is run with the repository owner’s secret.
