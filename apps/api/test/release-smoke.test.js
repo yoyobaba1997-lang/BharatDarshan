@@ -1,7 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {spawn} from "node:child_process";
-import {once} from "node:events";
 
 const apiPort=49000+Math.floor(Math.random()*1000);
 const webPort=50000+Math.floor(Math.random()*1000);
@@ -18,7 +17,7 @@ async function waitFor(url,child,label){
   throw new Error(`${label} did not become ready`);
 }
 function runScript(script,env){
-  const result=spawn(process.execPath,[script],{cwd:new URL("../../",import.meta.url),env:{...process.env,...env},stdio:["ignore","pipe","pipe"]});
+  const result=spawn(process.execPath,[script],{cwd:new URL("../../../",import.meta.url),env:{...process.env,...env},stdio:["ignore","pipe","pipe"]});
   return new Promise((resolve,reject)=>{
     let stdout="",stderr="";
     result.stdout.on("data",chunk=>stdout+=chunk);
